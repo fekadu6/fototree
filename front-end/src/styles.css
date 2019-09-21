@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #000;
+}
+
+header {
+}
+
+.mat-toolbar {
+  background: #253238;
+}
+.logo {
+  /* padding-top: 15px; */
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+.logo-foto {
+  color: white;
+}
+
+.logo-tree {
+  color: #e35a76;
+}
+
+.top-menu {
+  align-content: flex-end;
+}
+
+.mat-stroked-button {
+  color: #fff;
+}
+.btn-photo-info:hover {
+  background: #e35a76;
+  color: #fff;
+}
