@@ -1,4 +1,4 @@
-POST http://localhost:3000/fototree-api/signup HTTP/1.1
+POST http://localhost:3000/api/signup HTTP/1.1
 Content-Type: application/json
 
 {
@@ -17,13 +17,32 @@ Content-Type: application/json
 }
 
 
-
 ####
 
-POST http://localhost:3000/fototree-api/signin HTTP/1.1
+POST http://localhost:3000/api/signin HTTP/1.1
 Content-Type: application/json
 
 {
       "email": "fekaduw@mum.edu",
       "password": "test"
+
+}
+
+##### New photo
+POST http://localhost:3000/api/photos HTTP/1.1
+Content-Type: application/json
+
+{"user_id":"5d867e1003d3aa0393136774",
+ "photo":     
+      {     "title": "Agiro",
+            "category": "MUM",
+            "url":"http://drive.google.com/photos/1",
+            "desc": "test test test test",
+            "price": 0,
+            "like" : 5000,
+            "comments": [
+            {"comment": "great great","date":""},
+            {"comment": "great great","date":""}
+            ]
+      }
 }
