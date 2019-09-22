@@ -5,3 +5,4 @@ mongoose.connect("mongodb://localhost:27017/fototree_api", {
   useCreateIndex: true,
   useUnifiedTopology: true
 });
+
