@@ -1,0 +1,17 @@
+.form-container {
+  margin: auto;
+  width: 50%;
+}
+.signup-form {
+  background: #253238;
+  color: #fff;
+}
+.controls {
+  color: #fff;
+  background: #253238;
+}
+
+mat-card,
+mat-form-field {
+  background: #232323;
+}

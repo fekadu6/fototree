@@ -7,7 +7,10 @@ import {
   MatSidenavModule,
   MatCardModule,
   MatGridListModule,
-  MatInputModule
+  MatInputModule,
+  MatChipList,
+  MatChipsModule,
+  MatRadioModule
 } from "@angular/material";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -25,7 +28,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatCardModule,
     MatGridListModule,
     MatInputModule,
-    FlexLayoutModule
+    MatChipsModule,
+    MatRadioModule
   ],
   exports: [
     MatToolbarModule,
@@ -38,7 +42,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatCardModule,
     MatGridListModule,
     MatInputModule,
-    FlexLayoutModule
+    MatChipsModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule {}

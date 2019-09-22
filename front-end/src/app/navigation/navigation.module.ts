@@ -8,7 +8,9 @@ import { HomeComponent } from "./../home/home.component";
 import { CategoryComponent } from "../home/category/category.component";
 import { CategoryListComponent } from "../home/category/category-list/category-list.component";
 import { MaterialModule } from "../material/material.module";
-import { SidenavListComponent } from "./sidenav-list/sidenav-list.component";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,12 +18,16 @@ import { SidenavListComponent } from "./sidenav-list/sidenav-list.component";
     SigninComponent,
     HomeComponent,
     CategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     MaterialModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
     RouterModule.forChild([
       {
         path: "signup",

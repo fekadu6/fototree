@@ -1,0 +1,13 @@
+.form-container {
+  margin: auto;
+  width: 50%;
+}
+.signin-form {
+  background: #253238;
+  color: #fff;
+}
+
+.controls {
+  color: #fff;
+  background: #253238;
+}
