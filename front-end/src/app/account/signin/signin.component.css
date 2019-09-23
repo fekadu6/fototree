@@ -1,13 +1,18 @@
 .form-container {
-  margin: auto;
+  margin: 100px auto;
   width: 50%;
 }
 .signin-form {
   background: #aeb6c5;
-  color: #fff;
+  color: #000;
 }
 
 .controls {
   color: #fff;
   background: #253238;
+}
+
+mat-card,
+mat-form-field {
+  background: #232323;
 }

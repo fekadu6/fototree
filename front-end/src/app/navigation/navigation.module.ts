@@ -17,6 +17,8 @@ import { FileUploadComponent } from "../photo/file-upload/file-upload.component"
 import { CartComponent } from "../photo/shopping-cart/cart/cart.component";
 import { CartItemComponent } from "../photo/shopping-cart/cart-item/cart-item.component";
 import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.component";
+import { CheckoutConfirmationComponent } from "../photo/shopping-cart/checkout-confirmation/checkout-confirmation.component";
+import { SearchComponent } from "../home/category/search/search.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.comp
     FileUploadComponent,
     CartComponent,
     CartItemComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CheckoutConfirmationComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +61,10 @@ import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.comp
       {
         path: "checkout",
         component: CheckoutComponent
+      },
+      {
+        path: "checkout-confirmation",
+        component: CheckoutConfirmationComponent
       },
 
       { path: "", redirectTo: "home", pathMatch: "full" }

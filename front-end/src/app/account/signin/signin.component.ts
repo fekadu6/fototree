@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { AuthService } from "../auth.service";
+import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signin",
@@ -11,11 +13,12 @@ export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   isLoading: boolean = false;
   error: string = null;
-  private token;
+  userStateSubscription = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.signinForm = formBuilder.group({
       email: [
@@ -39,16 +42,22 @@ export class SigninComponent implements OnInit {
       email: this.signinForm.value.email,
       password: this.signinForm.value.password
     };
+
     this.isLoading = true;
 
-    const response = this.authService.signIn(account);
+    this.authService.signIn(account);
 
-    if (response) {
-      this.isLoading = false;
-      console.log(response);
-    } else {
-      this.error = response;
-      this.isLoading = false;
-    }
+    this.userStateSubscription = this.authService
+      .getUserState()
+      .subscribe(userState => {
+        if (userState.token) {
+          this.isLoading = false;
+
+          this.router.navigate(["/cart"]);
+        } else {
+          this.error = "Error: check your user name or password";
+          this.isLoading = false;
+        }
+      });
   }
 }

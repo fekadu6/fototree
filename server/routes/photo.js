@@ -1,60 +1,52 @@
-
 const User = require("./../model/user");
-const router = require('express').Router();
+const router = require("express").Router();
 
-
-
-//get list of photos
+//get all photos
 router.get("/photos", (req, res) => {
-
-    User.find({}).then(users => {
-        if (!users) {
-            return res.json({})
-        }
-        console.log("users:", users);
-        const photos = users.map(u => u.uploaded_photos);
-        console.log("Photo:", photos);
-        res.send(users);
-    });
-})
+  User.find({}, { email: 1, uploaded_photos: 1 }).then(photos => {
+    if (!photos) {
+      return res.json({ message: "not found" });
+    }
+    res.json({ photos: photos });
+  });
+});
 
 //get list of photos by user uploaded
-router.get("/photos/:user_id", (req, res) => {
-
-})
+router.get("/photos/:email", (req, res) => {
+  console.log(req.param.email);
+  User.find({ email: req.params.email }, { uploaded_photos: 1 }).then(
+    photos => {
+      if (!photos) {
+        return res.json({ message: "not found photo" });
+      }
+      const uploaded_photos = photos.map(p => p.uploaded_photos);
+      res.json({ photos: uploaded_photos });
+    }
+  );
+});
 
 //upload photo
 router.post("/photos", (req, res) => {
+  let message = {};
 
-    console.log(req.body);
-    User.findById(req.body.user_id, (err, foundUser) => {
+  console.log(req.body.email);
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.json({ message: "not found photo" });
+      }
+      if (req.body.photo) user.uploaded_photos.push(req.body.photo);
 
-        console.log("foundUser", foundUser);
-        if (req.body) foundUser.uploaded_photos.push(req.body.photo);
+      user.save(err => {
+        if (err) messge = { message: "Upload fail" };
 
-        foundUser.save((err) => {
-            if (err) res.json({ "message": "Upload fail" });
-            res.json({ "message": "Upload successfully!" });
-        })
-    }).catch(err => {
-        res.json({ "message": "User is not found!" })
+        message = { message: "Upload successfully!" };
+        res.json(message);
+      });
+    })
+    .catch(e => {
+      console.log("error", e);
     });
-})
-
-router.patch("/photos/:id", (req, res) => {
-
-})
-
-router.delete("/photos/:id", (req, res) => {
-
-})
-
-
+});
 
 module.exports = router;
-
-
-router.post('/update-resume', function (req, res) {
-
-
-});

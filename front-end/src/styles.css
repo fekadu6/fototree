@@ -71,3 +71,8 @@ header {
   flex: 1;
   padding: 15px;
 }
+
+.mat-form-field-infix,
+.mat-form-field-wrapper {
+  background: #aeb6c5;
+}

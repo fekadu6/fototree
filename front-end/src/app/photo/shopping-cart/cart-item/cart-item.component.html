@@ -6,7 +6,7 @@
     <h3>{{ photo.title }}</h3>
     <p>Author</p>
     <p>{{ photo.description }}</p>
-    <button mat-raised-button (click)="deletePhoto(photo.id)">Delete</button>
+    <button mat-raised-button (click)="deletePhoto(photo._id)">Delete</button>
   </div>
   <div class="cart-item-price">
     <h1>{{ photo.price | currency }}</h1>
