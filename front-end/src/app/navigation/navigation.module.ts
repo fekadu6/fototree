@@ -13,6 +13,10 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { PhotodetailComponent } from "../photo/photodetail/photodetail.component";
 import { PhotoModule } from "../photo/photo.module";
+import { FileUploadComponent } from "../photo/file-upload/file-upload.component";
+import { CartComponent } from "../photo/shopping-cart/cart/cart.component";
+import { CartItemComponent } from "../photo/shopping-cart/cart-item/cart-item.component";
+import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { PhotoModule } from "../photo/photo.module";
     HomeComponent,
     CategoryComponent,
     CategoryListComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    FileUploadComponent,
+    CartComponent,
+    CartItemComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +50,15 @@ import { PhotoModule } from "../photo/photo.module";
         component: HomeComponent
       },
       { path: "photo_details", component: PhotodetailComponent },
+      {
+        path: "cart",
+        component: CartComponent
+      },
+      {
+        path: "checkout",
+        component: CheckoutComponent
+      },
+
       { path: "", redirectTo: "home", pathMatch: "full" }
     ])
   ]

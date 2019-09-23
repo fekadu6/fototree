@@ -37,15 +37,15 @@ const User = mongoose.model("User", {
   ],
   cart: [
     {
-      photos: [
-        {
-          url: { type: String, require: true },
-          category: { type: String, require: true },
-          title: { type: String, require: true },
-          description: { type: String, require: true },
-          price: { type: Number, require: true }
-        }
-      ]
+      // photos: [
+      //  {
+      url: { type: String, require: true },
+      category: { type: String, require: true },
+      title: { type: String, require: true },
+      description: { type: String, require: true },
+      price: { type: Number, require: true }
+      //   }
+      // ]
     }
   ],
   bought_photos: [

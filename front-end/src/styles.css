@@ -7,6 +7,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #000;
+  color: #757575;
 }
 
 .controls {
@@ -42,4 +43,31 @@ header {
 .btn-photo-info:hover {
   background: #e35a76;
   color: #fff;
+}
+
+.main-content-container {
+  width: 80%;
+  margin: auto;
+}
+
+.cart-img img {
+  width: 200px;
+  height: 250px;
+}
+
+.cart-item-container {
+  display: flex;
+  border: 1px solid #e35a76;
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+}
+
+.cart-item-detail {
+  flex: 0 0 65%;
+  padding: 15px;
+}
+
+.cart-item-price {
+  flex: 1;
+  padding: 15px;
 }
