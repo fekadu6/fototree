@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 //todo: add X-Powered By prottection, ETag, etc...
 
-app.use("/api", mainRouter);
-app.use("/api", photoRouter);
+app.use("/fototree-api", mainRouter);
+app.use("/fototree-api", photoRouter);
 
 app.listen(port, _ => console.log(`Server is running on port ${port}`));

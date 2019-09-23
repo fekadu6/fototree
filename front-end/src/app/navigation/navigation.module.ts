@@ -11,6 +11,8 @@ import { MaterialModule } from "../material/material.module";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { PhotodetailComponent } from "../photo/photodetail/photodetail.component";
+import { PhotoModule } from "../photo/photo.module";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { HttpClientModule } from "@angular/common/http";
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    PhotoModule,
     RouterModule.forChild([
       {
         path: "signup",
@@ -39,6 +41,7 @@ import { HttpClientModule } from "@angular/common/http";
         path: "home",
         component: HomeComponent
       },
+      { path: "photo_details", component: PhotodetailComponent },
       { path: "", redirectTo: "home", pathMatch: "full" }
     ])
   ]

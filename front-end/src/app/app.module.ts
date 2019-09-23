@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { NavigationModule } from "./navigation/navigation.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "./account/auth.interceptor";
+import { PhotoModule } from "./photo/photo.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthInterceptor } from "./account/auth.interceptor";
     MaterialModule,
     BrowserAnimationsModule,
     NavigationModule,
+    PhotoModule,
     RouterModule.forRoot([
       { path: "fototree", loadChildren: "./navigation/navigation.module" },
       { path: "**", component: PageNotFoundComponent }
