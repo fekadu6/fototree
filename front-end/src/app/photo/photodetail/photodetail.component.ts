@@ -8,27 +8,29 @@ import { PhotodetailService } from "./photodetail.service";
   templateUrl: "./photodetail.component.html",
   styleUrls: ["./photodetail.component.css"]
 })
-export class PhotodetailComponent implements OnInit, OnDestroy {
-  photoID: any;
-  userID: any;
-  sub: any;
-  http: HttpClient;
-  photoService: PhotodetailService;
-
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    //read ids from url
-    this.sub = this.route.params.subscribe(params => {
-      this.userID = params["user_id"];
-      this.photoID = params["photo_id"];
-    });
-
-    //send photo id to server and return photo object
-    this.photoService.getPhoto(this.userID, this.photoID);
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+export class PhotodetailComponent {
+  //implements OnInit, OnDestroy {
+  // photoID: any;
+  // userID: any;
+  // routeParamsSub: any;
+  // http: HttpClient;
+  // photoService: PhotodetailService;
+  // data: any;
+  // constructor(private route: ActivatedRoute) {}
+  // ngOnInit() {
+  //   //read ids from url
+  //   this.routeParamsSub = this.route.params.subscribe(params => {
+  //     this.userID = params["user_id"];
+  //     this.photoID = params["photo_id"];
+  //   });
+  //   //send user id and photo id to server and return photo details object
+  //   this.photoService
+  //     .getPhotoDetails(this.userID, this.photoID)
+  //     .subscribe(response => {
+  //       this.data = response;
+  //     });
+  // }
+  // ngOnDestroy(): void {
+  //   this.routeParamsSub.unsubscribe();
+  // }
 }

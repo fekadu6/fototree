@@ -1,38 +1,52 @@
 const User = require("./../model/user");
 const router = require("express").Router();
 
-//get all photos api
+//get all photos
 router.get("/photos", (req, res) => {
   User.find({}, { email: 1, uploaded_photos: 1 }).then(photos => {
     if (!photos) {
-      return res.json({ message: "There are no photos found" });
+      return res.json({ message: "not found" });
     }
-
     res.json({ photos: photos });
   });
 });
 
 //get list of photos by user uploaded
-router.get("/photos/:user_id", (req, res) => {});
+router.get("/photos/:email", (req, res) => {
+  console.log(req.param.email);
+  User.find({ email: req.params.email }, { uploaded_photos: 1 }).then(
+    photos => {
+      if (!photos) {
+        return res.json({ message: "not found photo" });
+      }
+      const uploaded_photos = photos.map(p => p.uploaded_photos);
+      res.json({ photos: uploaded_photos });
+    }
+  );
+});
 
 //upload photo
 router.post("/photos", (req, res) => {
-  console.log(req.body);
-  User.findById(req.body.user_id, (err, foundUser) => {
-    console.log("foundUser", foundUser);
-    if (req.body) foundUser.uploaded_photos.push(req.body.photo);
+  let message = {};
 
-    foundUser.save(err => {
-      if (err) res.json({ message: "Upload fail" });
-      res.json({ message: "Upload successfully!" });
+  console.log(req.body.email);
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.json({ message: "not found photo" });
+      }
+      if (req.body.photo) user.uploaded_photos.push(req.body.photo);
+
+      user.save(err => {
+        if (err) messge = { message: "Upload fail" };
+
+        message = { message: "Upload successfully!" };
+        res.json(message);
+      });
+    })
+    .catch(e => {
+      console.log("error", e);
     });
-  }).catch(err => {
-    res.json({ message: "User is not found!" });
-  });
 });
-
-router.patch("/photos/:id", (req, res) => {});
-
-router.delete("/photos/:id", (req, res) => {});
 
 module.exports = router;

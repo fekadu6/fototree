@@ -8,7 +8,7 @@ export class PhotodetailService {
   http: HttpClient;
   constructor() {}
 
-  getPhoto(user_id, photo_id) {
+  getPhotoDetails(user_id, photo_id) {
     return this.http.get(`/photodetail/${user_id}/${photo_id}`);
   }
 }

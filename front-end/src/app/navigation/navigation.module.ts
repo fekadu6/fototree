@@ -11,6 +11,8 @@ import { MaterialModule } from "../material/material.module";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { PhotodetailComponent } from "../photo/photodetail/photodetail.component";
+import { PhotoModule } from "../photo/photo.module";
 import { FileUploadComponent } from "../photo/file-upload/file-upload.component";
 import { CartComponent } from "../photo/shopping-cart/cart/cart.component";
 import { CartItemComponent } from "../photo/shopping-cart/cart-item/cart-item.component";
@@ -39,7 +41,7 @@ import { SearchComponent } from "../home/category/search/search.component";
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    PhotoModule,
     RouterModule.forChild([
       {
         path: "signup",
@@ -51,6 +53,7 @@ import { SearchComponent } from "../home/category/search/search.component";
         path: "home",
         component: HomeComponent
       },
+      { path: "photo_details", component: PhotodetailComponent },
       {
         path: "cart",
         component: CartComponent
