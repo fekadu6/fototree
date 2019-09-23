@@ -27,15 +27,13 @@ router.post("/signin", async (req, res) => {
     })
     .then(result => {
       if (!result) {
-        //console.log({ message: "Unsuccessful log in attempt" });
-
         return res.json({ message: "Unsuccessful login attempt" });
       }
 
       token = getToken(user.email, user._id);
-      //console.log("Token", token, user._id);
+      console.log({ message: "Successfully logged in", token: token });
 
-      res.status(200).json({ token: token });
+      res.status(200).json({ message: "Successfully logged in", token: token });
     })
     .catch(err => res.json({ error: err }));
 });
@@ -80,12 +78,11 @@ router.post("/signup", async (req, res) => {
 
 //get photos api
 
-<<<<<<< HEAD
 //add shopping cart items
 router.post("/cart/add", async (req, res) => {
   const userId = req.body.userId;
 
-  await User.findOne({ _id: userId })
+  await User.findOne({ email: userId })
     .then(user => {
       if (!user) {
         return res
@@ -102,7 +99,7 @@ router.post("/cart/add", async (req, res) => {
       };
 
       return User.updateOne(
-        { _id: userId },
+        { email: userId },
         { $push: { cart: newPhoto } }
       ).then(cart => {
         console.log(newPhoto);
@@ -124,7 +121,7 @@ router.post("/cart/add", async (req, res) => {
 router.get("/cart/get/:userId", async (req, res) => {
   const userId = req.params.userId;
 
-  await User.findOne({ _id: userId })
+  await User.findOne({ email: userId })
     .then(user => {
       console.log(user);
 
@@ -144,10 +141,8 @@ router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
   const userId = req.params.userId;
   const cartItemId = req.params.cartItemId;
 
-  let user;
-
   await User.updateOne(
-    { _id: userId },
+    { email: userId },
     { $pull: { cart: { _id: cartItemId } } }
   )
     .then(result => {
@@ -161,62 +156,45 @@ router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
     })
     .catch(error => res.status(401).json(error));
 });
-=======
 
+// checkout items api
+router.post("/cart/checkout", async (req, res) => {
+  const userId = req.body.userId;
+  const boughtPhoto = req.body.photos;
 
+  console.log(userId);
+  console.log(boughtPhoto);
+
+  await User.updateMany(
+    { email: userId },
+    { $push: { bought_photos: boughtPhoto } }
+  ).then(response => {
+    if (!response) {
+      return res
+        .status(501)
+        .json({ message: "Checkout items could not be added" });
+    }
+
+    res.status(200).json({ message: "Items successfully checkout." });
+  });
+});
 
 //get photo details api
 
-
-
-router.get('/photodetail/:user_id/:photo_id', async (req, res, next) => {
+router.get("/photodetail/:user_id/:photo_id", async (req, res, next) => {
   console.log("hi");
 
   let userID = req.param.user_id;
   let photoID = req.param.photo_id;
 
   User.find({ _id: userID, uploaded_photos: { $elemMatch: { _id: photoID } } })
-    .then((data) => {
+    .then(data => {
       console.log(data);
       res.status(200).json(data);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(error);
     });
-
 });
 
-
-
-
-
->>>>>>> 72e187ac9767fda38d66accb9a141f8c49aeafc2
-
 module.exports = router;
-
-
-
-
-
-
-
-   //<field>: {$elemMatch: {<query1>, <query2>, ... } } }
-        //   if (!user) {
-        //     return res.json({ message: 'SOmething..' })
-        //   }
-
-
-        //   user.find({ "uploaded_photos._id": photoID }).then((data) => {
-        //     console.log(data);
-        //     res.status(200).json(data);
-        //   })
-        //     .catch((error) => {
-        //       console.log(error);
-        //     })
-
-        // });
-
-
-
-
-

@@ -45,20 +45,22 @@ export class CartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService) {}
   ngOnInit() {
-    this.getCartItems("5d865a91f749410facbb699c");
+    this.getCartItems();
   }
 
-  deletePhoto(id) {
-    this.cartItems = this.cartItems.filter((elem, index, arr) => {
-      return elem.id !== id;
-    });
+  deletePhoto(photoId) {
+    console.log("Delete photo id:", photoId);
+    this.cartService.deleteCartItem(photoId);
   }
 
-  getCartItems(userId) {
-    this.cartService.getCarts(userId);
+  getCartItems() {
+    this.cartService.getCarts();
     this.cartItemSubscription = this.cartService
       .getCartUpdated()
-      .subscribe(carts => (this.cartItems = carts));
+      .subscribe(carts => {
+        this.cartItems = carts;
+        console.log("Cart items:", carts);
+      });
   }
 
   ngOnDestroy() {

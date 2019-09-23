@@ -1,12 +1,16 @@
 .search-form {
   min-width: 150px;
-  max-width: 70%;
   width: 100%;
 }
 
 .search-full-width {
   width: 90%;
 }
-.mat-input-element {
+/* .mat-input-element {
   color: #fff;
+} */
+
+.search-form-container {
+  width: 80%;
+  margin: auto;
 }

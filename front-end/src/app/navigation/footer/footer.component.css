@@ -1,5 +1,7 @@
 .footer {
-  background: #181718;
+  /* background: #181718; */
+  background: #253238;
+
   height: 50px;
   padding: 20px;
   margin-top: 20px;
@@ -7,7 +9,8 @@
 
 .footer-menu,
 .footer-copyright {
-  color: #575d68;
+  /* color: #575d68; */
+  color: #aaa;
 }
 
 .footer-copyright {
