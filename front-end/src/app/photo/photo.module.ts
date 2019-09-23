@@ -6,15 +6,16 @@ import { RouterModule } from "@angular/router";
 
 import { CartComponent } from "./shopping-cart/cart/cart.component";
 import { CheckoutComponent } from "./shopping-cart/checkout/checkout.component";
-import { CheckoutConfirmationComponent } from './shopping-cart/checkout-confirmation/checkout-confirmation.component';
+import { CheckoutConfirmationComponent } from "./shopping-cart/checkout-confirmation/checkout-confirmation.component";
+import { FileUploadComponent } from "./file-upload/file-upload.component";
 
 @NgModule({
   declarations: [
-    FileUploadComponent,
-    PhotodetailComponent,
-    CartComponent,
-    CheckoutComponent,
-    CheckoutConfirmationComponent
+    // FileUploadComponent,
+    PhotodetailComponent
+    //CartComponent,
+    //CheckoutComponent,
+    // CheckoutConfirmationComponent
   ],
   imports: [CommonModule, RouterModule]
 })

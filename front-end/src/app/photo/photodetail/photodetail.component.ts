@@ -35,9 +35,10 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
       .getPhotoDetails(this.email, this.photoID)
       .subscribe(response => {
         this.data = response;
-        console.log("first name: " + response.fname);
-        console.log("last name: " + response.lname);
-        console.log("email: " + response.photo_likes);
+        console.log(response);
+        // console.log("first name: " + response.fname);
+        // console.log("last name: " + response.lname);
+        // console.log("email: " + response.photo_likes);
       });
   }
   ngOnDestroy(): void {
