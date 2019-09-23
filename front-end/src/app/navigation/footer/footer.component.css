@@ -1,6 +1,15 @@
 .footer {
-  background: #191818;
+  background: #181718;
   height: 50px;
   padding: 20px;
   margin-top: 20px;
+}
+
+.footer-menu,
+.footer-copyright {
+  color: #575d68;
+}
+
+.footer-copyright {
+  padding: 15px;
 }

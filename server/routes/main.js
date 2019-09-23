@@ -48,6 +48,7 @@ router.post("/signup", async (req, res) => {
   const password = req.body.password;
   const profilePic = req.body.profile_picture;
   const paymentMethod = req.body.payment_method;
+  const uploaded_photos = req.body.uploaded_photos;
 
   await bcrypt
     .hash(password, SALT)
@@ -58,7 +59,8 @@ router.post("/signup", async (req, res) => {
         email: email,
         password: hashedPassword,
         profile_picture: profilePic,
-        payment_method: paymentMethod
+        payment_method: paymentMethod,
+        uploaded_photos: uploaded_photos
       };
 
       const user = new User(newUser);
@@ -76,5 +78,86 @@ router.post("/signup", async (req, res) => {
 });
 
 //get photos api
+
+//add shopping cart items
+router.post("/cart/add", async (req, res) => {
+  const userId = req.body.userId;
+
+  await User.findOne({ _id: userId })
+    .then(user => {
+      if (!user) {
+        return res
+          .status(401)
+          .json({ message: "User cannot be found. Try again" });
+      }
+
+      const newPhoto = {
+        url: req.body.url,
+        category: req.body.category,
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price
+      };
+
+      return User.updateOne(
+        { _id: userId },
+        { $push: { cart: newPhoto } }
+      ).then(cart => {
+        console.log(newPhoto);
+        if (!cart) {
+          return res
+            .status(501)
+            .json({ message: "Cart item could not be added." });
+        }
+
+        res
+          .status(201)
+          .json({ message: "Item is successfully added to the cart." });
+      });
+    })
+    .catch(error => res.status(401).json(error));
+});
+
+//get shopping cart items by User Id
+router.get("/cart/get/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  await User.findOne({ _id: userId })
+    .then(user => {
+      console.log(user);
+
+      if (!user) {
+        return res
+          .status(401)
+          .json({ message: "User cannot be found. Try again" });
+      }
+
+      res.status(201).json({ message: "Fetching cart items", cart: user.cart });
+    })
+    .catch(error => res.status(401).json(error));
+});
+
+//delete shopping cart items by User Id
+router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
+  const userId = req.params.userId;
+  const cartItemId = req.params.cartItemId;
+
+  let user;
+
+  await User.updateOne(
+    { _id: userId },
+    { $pull: { cart: { _id: cartItemId } } }
+  )
+    .then(result => {
+      if (!result) {
+        return res
+          .status(501)
+          .json({ message: "Cart item could not be deleted." });
+      }
+
+      res.status(201).json({ message: "Cart item successfully deleted" });
+    })
+    .catch(error => res.status(401).json(error));
+});
 
 module.exports = router;

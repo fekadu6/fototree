@@ -6,6 +6,7 @@ import {
   FormControl
 } from "@angular/forms";
 import { AuthService } from "../auth.service";
+import { toFormData } from "src/app/photo/file-upload/form_data";
 
 @Component({
   selector: "app-signup",
@@ -37,9 +38,9 @@ export class SignupComponent implements OnInit {
       password: ["", Validators.required],
       fname: ["", Validators.required],
       lname: ["", Validators.required],
-      // profilePic: ["", [Validators.required, requiredFileType('png')]],
-      // profilePic: ["", [Validators.required]],
-      // cardType: ["", Validators.required]
+      //profilePic: ["", [Validators.required, requiredFileType('png')]],
+      //profilePic: ["", Validators.required],
+      cardType: [""],
       cardNumber: ["", Validators.nullValidator],
       secNumber: ["", Validators.nullValidator],
       expiryDate: ["", Validators.nullValidator],
@@ -59,7 +60,7 @@ export class SignupComponent implements OnInit {
       password: this.signupForm.value.password,
       profile_picture: this.signupForm.value.profilePic,
       payment_method: {
-        // card_type: this.signupForm.value.cardType,
+        card_type: this.signupForm.value.cardType,
         number: this.signupForm.value.cardNumber,
         secrete_no: this.signupForm.value.secNumber,
         expiry_date: this.signupForm.value.expiryDate,
@@ -67,15 +68,17 @@ export class SignupComponent implements OnInit {
       }
     };
 
-    this.isLoading = true;
-    const response = this.authService.signUp(user);
+    console.log("Card type:", this.signupForm.value.cardType);
 
-    if (response) {
-      this.isLoading = false;
-      console.log(response);
-    } else {
-      this.error = response;
-      this.isLoading = false;
-    }
+    // this.isLoading = true;
+    // const response = this.authService.signUp(user);
+
+    // if (response) {
+    //   this.isLoading = false;
+    //   console.log(response);
+    // } else {
+    //   this.error = response;
+    //   this.isLoading = false;
+    // }
   }
 }

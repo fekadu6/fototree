@@ -11,6 +11,10 @@ import { MaterialModule } from "../material/material.module";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { FileUploadComponent } from "../photo/file-upload/file-upload.component";
+import { CartComponent } from "../photo/shopping-cart/cart/cart.component";
+import { CartItemComponent } from "../photo/shopping-cart/cart-item/cart-item.component";
+import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { HttpClientModule } from "@angular/common/http";
     HomeComponent,
     CategoryComponent,
     CategoryListComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    FileUploadComponent,
+    CartComponent,
+    CartItemComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +47,15 @@ import { HttpClientModule } from "@angular/common/http";
         path: "home",
         component: HomeComponent
       },
+      {
+        path: "cart",
+        component: CartComponent
+      },
+      {
+        path: "checkout",
+        component: CheckoutComponent
+      },
+
       { path: "", redirectTo: "home", pathMatch: "full" }
     ])
   ]

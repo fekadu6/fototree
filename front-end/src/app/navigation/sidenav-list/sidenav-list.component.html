@@ -7,14 +7,20 @@
 
   <!-- Let menu link -->
   <div class="top-menu">
-    <a mat-button [routerLink]="['home']"> Home </a>
-    <a mat-button> About Us </a>
-    <a mat-button> Contact Us </a>
+    <a mat-button [routerLink]="['home']">Home</a>
+    <a mat-button>About Us</a>
+    <a mat-button>Contact Us </a>
   </div>
   <span class="fill-space"></span>
 
   <!-- the right menu links -->
   <div class="top-menu">
+    <a mat-button [routerLink]="['cart']">
+      <mat-icon matBadge="15" matBadgeColor="warn" matBadgePosition="before"
+        >shopping_cart</mat-icon
+      >
+      Cart</a
+    >
     <a mat-button [routerLink]="['signup']"> Create Account </a>
     <a mat-button [routerLink]="['signin']"> Login </a>
   </div>
