@@ -47,10 +47,11 @@ Content-Type: application/json
       }
 }
 
+
 ####
 
 //get photo details of a specific photo
-GET http://localhost:3000/fototree-api/photodetail/firstlast@gmail.com/5d87f7b80b6c5248e8d37349 HTTP/1.1
+GET http://localhost:3000/fototree-api/photodetail/firstlast@gmail.com/5d8911055fb8813eb0ae8a0d HTTP/1.1
 
 ####
 
@@ -79,4 +80,8 @@ Content-Type: application/json
 "category": "NEW CATEGORY",
 "price": 613
 }
+
+####
+
+GET http://localhost:3000/fototree-api/photodetail/firstlast@gmail.com/5d8911055fb8813eb0ae8a0d HTTP/1.1
 

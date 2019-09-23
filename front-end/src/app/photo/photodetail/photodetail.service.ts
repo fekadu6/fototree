@@ -5,10 +5,15 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root"
 })
 export class PhotodetailService {
-  http: HttpClient;
-  constructor() {}
+  url = "http://localhost:3000/fototree-api/photodetail";
+  myHeaders;
+  constructor(public http: HttpClient) {}
 
-  getPhotoDetails(user_id, photo_id) {
-    return this.http.get(`/photodetail/${user_id}/${photo_id}`);
+  getPhotoDetails(email, photo_id) {
+    this.myHeaders = new Headers();
+    this.myHeaders.append("Content-Type", "application/json");
+    return this.http.get(`${this.url}/${email}/${photo_id}`, {
+      headers: this.myHeaders
+    });
   }
 }

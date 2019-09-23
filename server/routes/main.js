@@ -81,7 +81,9 @@ router.post("/signup", async (req, res) => {
 
 //get photos api
 
-<<<<<<< HEAD
+
+
+
 //add shopping cart items
 router.post("/cart/add", async (req, res) => {
   const userId = req.body.userId;
@@ -162,11 +164,8 @@ router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
     })
     .catch(error => res.status(401).json(error));
 });
-=======
 
-
-
-//get details of a specific photo
+//get details of a photo
 router.get('/photodetail/:email/:photo_id', async (req, res, next) => {
   console.log("photo detail fetch start");
   let email = req.params.email;
@@ -199,7 +198,7 @@ router.get('/photodetail/:email/:photo_id', async (req, res, next) => {
     });
 });
 
-//add a comment to a specific photo
+//comment a photo
 router.patch('/photodetail/:email/:photo_id/:comment', async (req, res, next) => {
   console.log("photo detail commenting start");
   let email = req.params.email;
@@ -219,7 +218,7 @@ router.patch('/photodetail/:email/:photo_id/:comment', async (req, res, next) =>
     });
 });
 
-//add a like to a specific photo
+//like a photo
 router.patch('/photodetail/:email/:photo_id', async (req, res, next) => {
   console.log("photo detail liking start");
   let email = req.params.email;
@@ -234,7 +233,7 @@ router.patch('/photodetail/:email/:photo_id', async (req, res, next) => {
     })
 });
 
-//delete a certain photo
+//delete a photo
 router.patch('/photodelete/:email/:photo_id/', async (req, res, next) => {
   console.log("deleting photo started");
   let email = req.params.email;
@@ -249,7 +248,7 @@ router.patch('/photodelete/:email/:photo_id/', async (req, res, next) => {
     })
 });
 
-//update a certain photo
+//update a photo
 router.patch('/photoupdate/:email/:photo_id/', async (req, res, next) => {
   console.log("updating photo started");
   let email = req.params.email;
@@ -274,7 +273,5 @@ router.patch('/photoupdate/:email/:photo_id/', async (req, res, next) => {
       console.log("photo is updated.")
     })
 })
-
->>>>>>> 72e187ac9767fda38d66accb9a141f8c49aeafc2
 
 module.exports = router;
