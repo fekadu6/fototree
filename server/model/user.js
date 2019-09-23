@@ -30,7 +30,7 @@ const User = mongoose.model("User", {
             profile_picture: { type: String, require: true }
           },
           comment: { type: String, require: true },
-          date: Date
+          date: String
         }
       ]
     }

@@ -1,31 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
+import { PhotodetailService } from "./photodetail.service";
 
 @Component({
-  selector: 'app-photodetail',
-  templateUrl: './photodetail.component.html',
-  styleUrls: ['./photodetail.component.css']
+  selector: "app-photodetail",
+  templateUrl: "./photodetail.component.html",
+  styleUrls: ["./photodetail.component.css"]
 })
 export class PhotodetailComponent implements OnInit, OnDestroy {
-  photoId: any;
-  private sub: any;
+  photoID: any;
+  userID: any;
+  sub: any;
+  http: HttpClient;
+  photoService: PhotodetailService;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    //read photo id from url
+    //read ids from url
     this.sub = this.route.params.subscribe(params => {
-      this.photoId = params["_id"];
+      this.userID = params["user_id"];
+      this.photoID = params["photo_id"];
     });
 
-    //send photo id to server and return author object
-
-
-
+    //send photo id to server and return photo object
+    this.photoService.getPhoto(this.userID, this.photoID);
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
 }
