@@ -30,35 +30,35 @@ const User = mongoose.model("User", {
             profile_picture: { type: String, require: true }
           },
           comment: { type: String, require: true },
-          date: Date
+          date: String
         }
       ]
     }
   ],
   cart: [
     {
-      photos: [
-        {
-          url: { type: String, require: true },
-          category: { type: String, require: true },
-          title: { type: String, require: true },
-          description: { type: String, require: true },
-          price: { type: Number, require: true }
-        }
-      ]
+      // photos: [
+      //  {
+      url: { type: String, require: true },
+      category: { type: String, require: true },
+      title: { type: String, require: true },
+      description: { type: String, require: true },
+      price: { type: Number, require: true }
+      //   }
+      // ]
     }
   ],
   bought_photos: [
     {
-      photo: [
-        {
-          url: { type: String, require: true },
-          category: { type: String, require: true },
-          title: { type: String, require: true },
-          description: { type: String, require: true },
-          price: { type: Number, require: true }
-        }
-      ]
+      // photo: [
+      //   {
+      url: { type: String, require: true, usePushEach: true },
+      category: { type: String, require: true, usePushEach: true },
+      title: { type: String, require: true, usePushEach: true },
+      description: { type: String, require: true, usePushEach: true },
+      price: { type: Number, require: true, usePushEach: true }
+      //   }
+      // ]
     }
   ]
 });

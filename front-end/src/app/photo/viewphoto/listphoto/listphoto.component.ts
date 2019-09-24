@@ -22,7 +22,6 @@ export class ListphotoComponent implements OnInit {
   ngOnInit() {
     console.log("init.....")
     
-    this.getFotos();
     this.getFotosByEmail();
   }
 

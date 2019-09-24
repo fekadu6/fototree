@@ -6,22 +6,16 @@ import { MaterialModule } from "./material/material.module";
 import { SidenavListComponent } from "./navigation/sidenav-list/sidenav-list.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule, Router } from "@angular/router";
-import { FeaturedComponent } from "./home/featured/featured.component";
-import { CategoryListComponent } from "./home/category/category-list/category-list.component";
-import { CategoryComponent } from "./home/category/category.component";
-import { SearchComponent } from "./navigation/search/search.component";
 import { FooterComponent } from "./navigation/footer/footer.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { NavigationModule } from "./navigation/navigation.module";
-import { PhotoModule } from './photo/photo.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "./account/auth.interceptor";
+import { GlobalItems } from "./model/BASE_URL";
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
     FooterComponent,
     PageNotFoundComponent,
     SidenavListComponent,
@@ -38,7 +32,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
       { path: "**", component: PageNotFoundComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    GlobalItems
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

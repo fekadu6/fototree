@@ -45,7 +45,7 @@ constructor(private formBuilder: FormBuilder, private http:HttpClient, public up
       };
 
       //post to API
-      const url = 'http://localhost:3000/api/photos';
+      const url = 'http://localhost:3000/fototree-api/photos';
       
       this.http.post(url, newPhoto).subscribe(response=>{
         console.log('Response:', response);

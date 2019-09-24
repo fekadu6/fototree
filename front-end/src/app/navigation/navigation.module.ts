@@ -11,9 +11,17 @@ import { MaterialModule } from "../material/material.module";
 import { SidenavListComponent } from "./sidenav-list/sidenav-list.component";
 import { PostphotoComponent } from '../photo/postphoto/postphoto.component';
 import { PhotoModule } from '../photo/photo.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { ViewphotoComponent } from '../photo/viewphoto/viewphoto.component';
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { PhotodetailComponent } from "../photo/photodetail/photodetail.component";
+import { FileUploadComponent } from "../photo/file-upload/file-upload.component";
+import { CartComponent } from "../photo/shopping-cart/cart/cart.component";
+import { CartItemComponent } from "../photo/shopping-cart/cart-item/cart-item.component";
+import { CheckoutComponent } from "../photo/shopping-cart/checkout/checkout.component";
+import { CheckoutConfirmationComponent } from "../photo/shopping-cart/checkout-confirmation/checkout-confirmation.component";
+import { SearchComponent } from "../home/category/search/search.component";
 
 @NgModule({
   declarations: [
@@ -21,15 +29,21 @@ import { ViewphotoComponent } from '../photo/viewphoto/viewphoto.component';
     SigninComponent,
     HomeComponent,
     CategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    LoadingSpinnerComponent,
+    CartComponent,
+    CartItemComponent,
+    CheckoutComponent,
+    CheckoutConfirmationComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     MaterialModule,
     PhotoModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: "signup",
@@ -48,7 +62,22 @@ import { ViewphotoComponent } from '../photo/viewphoto/viewphoto.component';
           {path:"viewphoto", component:ViewphotoComponent}
         ]
       },
-      { path: "", redirectTo: "home", pathMatch: "full"}
+     
+      { path: "photo_details", component: PhotodetailComponent },
+      {
+        path: "cart",
+        component: CartComponent
+      },
+      {
+        path: "checkout",
+        component: CheckoutComponent
+      },
+      {
+        path: "checkout-confirmation",
+        component: CheckoutConfirmationComponent
+      },
+
+      { path: "", redirectTo: "home", pathMatch: "full" }
     ])
   ]
 })

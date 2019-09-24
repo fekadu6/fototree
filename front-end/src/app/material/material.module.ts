@@ -10,8 +10,10 @@ import {
   MatInputModule,
   MatSelectModule,
   MatFormFieldModule,
-  MatRadioModule,
-  MatDialogModule
+  MatDialogModule,
+  MatChipList,
+  MatChipsModule,
+  MatRadioModule
 } from "@angular/material";
 
 import {MatFileUploadModule} from 'angular-material-fileupload';
@@ -34,10 +36,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FlexLayoutModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatRadioModule,
     MatFileUploadModule,
-    MatDialogModule
-  
+    MatDialogModule,
+    MatChipsModule,
+    MatRadioModule
   ],
   exports: [
     MatToolbarModule,
@@ -55,7 +57,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatFormFieldModule,
     MatRadioModule,
     MatFileUploadModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule {}

@@ -11,8 +11,9 @@ import { ListphotoComponent } from './viewphoto/listphoto/listphoto.component';
 import { OnephotoComponent } from './viewphoto/onephoto/onephoto.component';
 import { PhotoService } from '../services/photo.service';
 import { UploadService } from '../upload/upload.service';
+//import { FileUploadComponent } from "./file-upload/file-upload.component";
 
-
+import { FileUploadComponent } from "./file-upload/file-upload.component";
 
 @NgModule({
   declarations: [PhotodetailComponent,PostphotoComponent, ViewphotoComponent, ListphotoComponent, OnephotoComponent],
@@ -30,5 +31,14 @@ import { UploadService } from '../upload/upload.service';
   ],
   providers: [PhotoService, UploadService]
 })
-export class PhotoModule { }
+export class PhotoModule {
 
+  declarations: [
+    FileUploadComponent,
+    PhotodetailComponent
+    // CartComponent,
+    // CheckoutComponent,
+    // CheckoutConfirmationComponent
+  ]
+  imports: [CommonModule, RouterModule]
+}

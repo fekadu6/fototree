@@ -14,13 +14,13 @@ export class PhotoService {
 
     
     getPhotos(){
-        let phototUrl = "http://localhost:3000/api/photos";
+        let phototUrl = "http://localhost:3000/fototree-api/photos";
         console.log("PhotoService is calling");
         return this.http.get(phototUrl, {responseType: 'json'});
     }		
 
     getPhotosByEmail(){
-      let phototUrl = "http://localhost:3000/api/photos/"+this.user.email; //todo: replace by loggedUser.email
+      let phototUrl = "http://localhost:3000/fototree-api/photos/"+this.user.email; //todo: replace by loggedUser.email
       return this.http.get(phototUrl, {responseType: 'json'});
 
     }
