@@ -63,17 +63,11 @@
       <!-- <app-file-upload></app-file-upload> -->
 
       <label id="radio-group-label">Payment method: </label>
-      <!-- <mat-radio-group [formControl]="signupForm.get('cardType')"> -->
-      <mat-radio-button formControlName="cardType" [value]="PayPal"
-        >PayPal
-      </mat-radio-button>
-      <mat-radio-button formControlName="cardType" [value]="Visa"
-        >Visa</mat-radio-button
-      >
-      <mat-radio-button formControlName="cardType" [value]="Master"
-        >Master
-      </mat-radio-button>
-      <!-- </mat-radio-group> -->
+      <mat-radio-group formControlName="cardType">
+        <mat-radio-button *ngFor="let card of cardTypes" [value]="card">{{
+          card
+        }}</mat-radio-button>
+      </mat-radio-group>
 
       <!-- <div *ngIf="signupForm.get('cardType').hasError('invalid')">Error</div> -->
 

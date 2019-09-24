@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { toFormData } from "src/app/photo/file-upload/form_data";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
@@ -25,7 +26,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.signupForm = formBuilder.group({
       email: [
@@ -70,18 +72,20 @@ export class SignupComponent implements OnInit {
       }
     };
 
-    console.log("Card type:", this.signupForm.value.cardType);
+    console.log("Card type:", this.signupForm.value);
 
-    // this.isLoading = true;
-    // const response = this.authService.signUp(user);
-
-    // if (response) {
-    //   this.isLoading = false;
-    //   console.log(response);
-    // } else {
-    //   this.error = response;
-    //   this.isLoading = false;
-    // }
+    this.isLoading = true;
+    this.authService.signUp(user).subscribe(response => {
+      if (response) {
+        this.isLoading = false;
+        this.router.navigate(["/signin"]);
+        console.log(response);
+      }
+      //else {
+      //  this.error = response;
+      //        this.isLoading = false;
+      //}
+    });
   }
 
   onFileSeclected(event){

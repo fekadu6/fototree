@@ -87,7 +87,6 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
 });
 
 //comment a photo
-
 router.patch('/comment/:email/:photo_id', async (req, res, next) => {
   console.log("photo detail commenting start");
   let email = req.params.email;

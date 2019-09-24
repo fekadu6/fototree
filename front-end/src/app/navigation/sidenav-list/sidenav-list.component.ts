@@ -13,7 +13,7 @@ export class SidenavListComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getUserState().subscribe(userState => {
-      this.loggedIn = userState ? true : false;
+      this.loggedIn = userState.token ? true : false;
     });
 
     this.cartService.getCartUpdated().subscribe(carts => {
