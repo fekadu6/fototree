@@ -11,49 +11,9 @@ import { Subscription } from "rxjs";
 export class CartComponent implements OnInit, OnDestroy {
   cartItems: Photo[];
   cartItemSubscription = new Subscription();
-  // = [
-  //   new Photo(
-  //     "1",
-  //     "https://images.unsplash.com/photo-1561052630-15412ad90917?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-  //     "Portrait",
-  //     "Beauty is in the eyes of the beholder",
-  //     "Some description....",
-  //     15,
-  //     1000
-  //   ),
-
-  //   new Photo(
-  //     "2",
-  //     "https://images.unsplash.com/photo-1566398484393-54dfba620f06?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-  //     "Portrait",
-  //     "Beauty is in the eyes of the beholder",
-  //     "Some description....",
-  //     10,
-  //     1000
-  //   ),
-
-  //   new Photo(
-  //     "3",
-  //     "https://images.unsplash.com/photo-1568785629399-0cd9324febdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-  //     "Portrait",
-  //     "Beauty is in the eyes of the beholder",
-  //     "Some description....",
-  //     5,
-  //     1000
-  //   )
-  // ];
 
   constructor(private cartService: CartService) {}
   ngOnInit() {
-    this.getCartItems();
-  }
-
-  deletePhoto(photoId) {
-    console.log("Delete photo id:", photoId);
-    this.cartService.deleteCartItem(photoId);
-  }
-
-  getCartItems() {
     this.cartService.getCarts();
     this.cartItemSubscription = this.cartService
       .getCartUpdated()
@@ -61,6 +21,11 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartItems = carts;
         console.log("Cart items:", carts);
       });
+  }
+
+  deletePhoto(photoId) {
+    console.log("Delete photo id:", photoId);
+    this.cartService.deleteCartItem(photoId);
   }
 
   ngOnDestroy() {

@@ -18,7 +18,9 @@
           [formControl]="signinForm.get('email')"
       /></mat-form-field>
 
-      <div *ngIf="signinForm.get('email').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signinForm.get('email').hasError('invalid')"
+        >Error</mat-error
+      >
       <mat-form-field class="controls">
         <input
           matInput
@@ -29,7 +31,9 @@
         />
       </mat-form-field>
 
-      <div *ngIf="signinForm.get('password').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signinForm.get('password').hasError('invalid')"
+        >Error</mat-error
+      >
       <button
         mat-raised-button
         color="primary"

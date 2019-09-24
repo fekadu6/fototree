@@ -1,0 +1,9 @@
+.example-container {
+    background-color: beige;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }

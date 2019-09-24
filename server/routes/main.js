@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("./../model/user");
 const getToken = require("./../middlewares/token-generator");
-const ObjectID = require('mongodb').ObjectID
+const ObjectID = require("mongodb").ObjectID;
 
 const router = express.Router();
 const SALT = 12;
@@ -76,8 +76,6 @@ router.post("/signup", async (req, res) => {
     })
     .catch(error => res.json({ message: error }));
 });
-
-//get photos api
 
 //add shopping cart items
 router.post("/cart/add", async (req, res) => {

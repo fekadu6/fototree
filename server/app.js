@@ -3,6 +3,8 @@ const cors = require("cors");
 
 const mainRouter = require("./routes/main");
 const photoRouter = require("./routes/photo");
+const uploadRouter = require("./routes/upload");
+
 
 const port = process.env.PORT || 3000;
 
@@ -16,6 +18,7 @@ app.use(cors());
 app.disable("X-Powered-By");
 //todo: add X-Powered By prottection, ETag, etc...
 
+app.use("/fototree-api/upload",uploadRouter);
 app.use("/fototree-api", mainRouter);
 app.use("/fototree-api", photoRouter);
 
