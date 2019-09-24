@@ -156,7 +156,7 @@ router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
     .catch(error => res.status(401).json(error));
 });
 
-// checkout items api
+
 router.post("/cart/checkout", async (req, res) => {
   const userId = req.body.userId;
   const boughtPhoto = req.body.photos;

@@ -1,5 +1,6 @@
 const User = require("./../model/user");
 const router = require("express").Router();
+const ObjectID = require("mongodb").ObjectID;
 
 //get all photos
 router.get("/photos", (req, res) => {
@@ -90,7 +91,7 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
   );
 });
 
-//add a comment to a specific photo
+//comment a photo
 router.patch(
   "/photodetail/:email/:photo_id/:comment",
   async (req, res, next) => {
@@ -119,7 +120,7 @@ router.patch(
   }
 );
 
-//add a like to a specific photo
+//like a photo
 router.patch("/photodetail/:email/:photo_id", async (req, res, next) => {
   console.log("photo detail liking start");
   let email = req.params.email;
@@ -136,7 +137,7 @@ router.patch("/photodetail/:email/:photo_id", async (req, res, next) => {
   );
 });
 
-//delete a certain photo
+//delete a photo
 router.patch("/photodelete/:email/:photo_id/", async (req, res, next) => {
   console.log("deleting photo started");
   let email = req.params.email;
@@ -153,7 +154,7 @@ router.patch("/photodelete/:email/:photo_id/", async (req, res, next) => {
   );
 });
 
-//update a certain photo
+//update a photo
 router.patch("/photoupdate/:email/:photo_id/", async (req, res, next) => {
   console.log("updating photo started");
   let email = req.params.email;
