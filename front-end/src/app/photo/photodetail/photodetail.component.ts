@@ -4,11 +4,13 @@ import {
   OnDestroy,
   ViewChild,
   ViewContainerRef,
-  ElementRef
+  ElementRef,
+  Input
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { PhotodetailService } from "./photodetail.service";
+import { EmailAndPhotoIDService } from "./email-and-photo-id.service";
 
 @Component({
   selector: "app-photodetail",
@@ -16,6 +18,8 @@ import { PhotodetailService } from "./photodetail.service";
   styleUrls: ["./photodetail.component.css"]
 })
 export class PhotodetailComponent implements OnInit, OnDestroy {
+  @Input() param;
+
   email: String;
   photoID: any;
   routeParamsSub: any;
@@ -39,10 +43,16 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   commentList;
   input;
 
+  likeable = true;
+
+  liked = false;
+  disliked = false;
+
   constructor(
     private route: ActivatedRoute,
     public photoService: PhotodetailService,
-    public http: HttpClient
+    public http: HttpClient,
+    public photoInfo: EmailAndPhotoIDService
   ) {}
 
   ngOnInit() {
@@ -115,5 +125,28 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
 
   onKey(event) {
     this.input = event.target.value;
+  }
+
+  onLike() {
+    if (this.likeable) {
+      this.likes++;
+      this.photoService
+        .postLike(this.email, this.photoID)
+        .subscribe(response => {
+          console.log(response);
+        });
+      this.disliked = false;
+      this.liked = true;
+    } else {
+      this.likes--;
+      this.photoService
+        .postDislike(this.email, this.photoID)
+        .subscribe(response => {
+          console.log(response);
+        });
+      this.liked = false;
+      this.disliked = true;
+    }
+    this.likeable = !this.likeable;
   }
 }

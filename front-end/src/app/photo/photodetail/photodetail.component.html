@@ -22,10 +22,17 @@
 <br />
 <img src="{{ photo_url }}" alt="Photo placeholder" />;
 <p>Likes: &nbsp;&nbsp;&nbsp;{{ likes }}</p>
+<br />
+
+<button (click)="onLike()">Like</button>
+<br />
+<p *ngIf="liked">Photo is liked!</p>
+<p *ngIf="disliked">Your like is canceled.</p>
+<br />
 
 <h4>Comments:</h4>
 <Br />
-<ul>
+<!-- <ul>
   <li *ngFor="let comment of comments">
     {{ comment.comment }} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -36,7 +43,18 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ comment.date }}
     <br /><br /><br /><br />
   </li>
-</ul>
+</ul> -->
+
+<p id="div" *ngFor="let comment of comments">
+  {{ comment.comment }} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ comment.date }}
+  <br /><br /><br /><br />
+</p>
 
 <button *ngIf="addCommentButton" (click)="onComment()">Add a Comment</button>
 <textarea *ngIf="commentTextbox" #text (keyup)="onKey($event)"> </textarea>

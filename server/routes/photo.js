@@ -5,47 +5,47 @@ const ObjectID = require("mongodb").ObjectID;
 //get all photos
 router.get("/photos", (req, res) => {
 
-    User.find({}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
-        if(!photos){
-            return res.json({"message":"not found photo "})
-        }
-        res.json(photos);
-    });
+  User.find({}, { email: 1, fname: 1, lname: 1, profile_picture: 1, uploaded_photos: 1 }).then(photos => {
+    if (!photos) {
+      return res.json({ "message": "not found photo " })
+    }
+    res.json(photos);
+  });
 })
 
 //get list of photos by user uploaded
 router.get("/photos/:email", (req, res) => {
-        console.log(req.params.email);
-        User.find({email: req.params.email}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
-            if(!photos){
-                return res.json({"message":"not found photo"})
-            }
+  console.log(req.params.email);
+  User.find({ email: req.params.email }, { email: 1, fname: 1, lname: 1, profile_picture: 1, uploaded_photos: 1 }).then(photos => {
+    if (!photos) {
+      return res.json({ "message": "not found photo" })
+    }
 
-            res.json(photos);
-        });
+    res.json(photos);
+  });
 })
 
 //upload photo
-router.post("/photos",(req, res) => {
-    let message = {};
+router.post("/photos", (req, res) => {
+  let message = {};
 
-    console.log(req.body.email);
-    User.findOne({email: req.body.email}).then(user=> {
-        if(!user){
-            return res.json({"message":"not found photo"})
-        }
-        if(req.body.photo) user.uploaded_photos.push(req.body.photo);
+  console.log(req.body.email);
+  User.findOne({ email: req.body.email }).then(user => {
+    if (!user) {
+      return res.json({ "message": "not found photo" })
+    }
+    if (req.body.photo) user.uploaded_photos.push(req.body.photo);
 
-        user.save((err) =>{
-            if(err) messge = {"message":"Upload fail"};
+    user.save((err) => {
+      if (err) messge = { "message": "Upload fail" };
 
-            message = {"message":"Pushed photo successfully!"};
-            res.json(message);
-        })
+      message = { "message": "Pushed photo successfully!" };
+      res.json(message);
+    })
 
-    }).catch(e => {
-        console.log("error",e);
-    });
+  }).catch(e => {
+    console.log("error", e);
+  });
 })
 
 //get details of a specific photo
@@ -62,7 +62,7 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
       profile_picture: 1,
       "uploaded_photos.$": 1
     },
-    function(error, data) {
+    function (error, data) {
       if (error) {
         return res.json(error);
       }
@@ -102,8 +102,8 @@ router.patch('/comment/:email/:photo_id', async (req, res, next) => {
       if (error) {
         return res.json(error);
       }
-    );
-  }
+    });
+}
 );
 
 //like a photo
@@ -114,7 +114,24 @@ router.patch("/photodetail/:email/:photo_id", async (req, res, next) => {
   User.updateOne(
     { email: email, "uploaded_photos._id": photoID },
     { $inc: { "uploaded_photos.$.likes": 1 } },
-    function(error, data) {
+    function (error, data) {
+      if (error) {
+        return res.json(error);
+      }
+      console.log("like is added.");
+    }
+  );
+});
+
+//dislike a photo
+router.patch("/dislike/:email/:photo_id", async (req, res, next) => {
+  console.log("photo detail liking start");
+  let email = req.params.email;
+  let photoID = new ObjectID(req.params.photo_id);
+  User.updateOne(
+    { email: email, "uploaded_photos._id": photoID },
+    { $inc: { "uploaded_photos.$.likes": -1 } },
+    function (error, data) {
       if (error) {
         return res.json(error);
       }
@@ -131,7 +148,7 @@ router.patch("/photodelete/:email/:photo_id/", async (req, res, next) => {
   User.updateOne(
     { email: email },
     { $pull: { uploaded_photos: { _id: photoID } } },
-    function(error, data) {
+    function (error, data) {
       if (error) {
         return res.json(error);
       }
@@ -161,7 +178,7 @@ router.patch("/photoupdate/:email/:photo_id/", async (req, res, next) => {
         "uploaded_photos.$.price": price
       }
     },
-    function(error, data) {
+    function (error, data) {
       if (error) {
         return res.json(error);
       }
