@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { toFormData } from "src/app/photo/file-upload/form_data";
+import { UploadService } from '../../upload/upload.service';
 import { Router } from "@angular/router";
 
 @Component({
@@ -18,7 +19,6 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   error: string = null;
   isLoading: boolean = false;
-
   selectedFile: File = null;
   
   //card types
@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private uploadService: UploadService,
     private router: Router
   ) {
     this.signupForm = formBuilder.group({
@@ -43,7 +44,7 @@ export class SignupComponent implements OnInit {
       fname: ["", Validators.required],
       lname: ["", Validators.required],
       //profilePic: ["", [Validators.required, requiredFileType('png')]],
-      profilePic: ["", Validators.required],
+      profilePic: [""],
       cardType: [""],
       cardNumber: ["", Validators.nullValidator],
       secNumber: ["", Validators.nullValidator],
@@ -55,6 +56,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
+  public onFileSeclected(event){
+    this.selectedFile = <File> event.target.files[0]; 
+  }
+
   onSubmit() {
     this.isLoading = true;
     const user = {
@@ -62,7 +67,7 @@ export class SignupComponent implements OnInit {
       lname: this.signupForm.value.lname,
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
-      profile_picture: this.signupForm.value.profilePic,
+      profile_picture: this.selectedFile.name,
       payment_method: {
         card_type: this.signupForm.value.cardType,
         number: this.signupForm.value.cardNumber,
@@ -74,21 +79,18 @@ export class SignupComponent implements OnInit {
 
     console.log("Card type:", this.signupForm.value);
 
+    
     this.isLoading = true;
     this.authService.signUp(user).subscribe(response => {
       if (response) {
+        this.uploadService.uploadFile(this.selectedFile);
         this.isLoading = false;
         this.router.navigate(["/signin"]);
         console.log(response);
+        
       }
-      //else {
-      //  this.error = response;
-      //        this.isLoading = false;
-      //}
+     
     });
   }
 
-  onFileSeclected(event){
-    this.selectedFile = <File> event.target.files[0];
-  }
 }

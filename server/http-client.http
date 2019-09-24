@@ -23,20 +23,19 @@ POST http://localhost:3000/fototree-api/signin HTTP/1.1
 Content-Type: application/json
 
 {
-      "email": "fekaduw@mum.edu",
+      "email": "johnpaul@mum.edu",
       "password": "test"
-
 }
 
 ##### New photo
 POST http://localhost:3000/fototree-api/photos HTTP/1.1
 Content-Type: application/json
 
-{"user_id": "5d879f68db3142472814710b",
+{"user_id": "5d8a8fad70c3795ad4f55565", "email":"johnpaul@mum.edu"
  "photo":     
       {     "title": "lasttitle",
             "category": "lastcategory",
-            "url":"Desktop/photo1.jpg",
+            "url":"alexandra-dech-UrlJUjvbcac-unsplash.jpg",
             "description": "bunu sil",
             "price": 0,
             "likes" : 5000,
@@ -46,6 +45,8 @@ Content-Type: application/json
             ]
       }
 }
+
+
 
 ####
 

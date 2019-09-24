@@ -6,12 +6,14 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { GlobalItems } from '../model/BASE_URL';
 
 const url = 'http://localhost:3000/fototree-api/upload';
 
 @Injectable()
 export class UploadService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   public upload(
     files: Set<File>
@@ -68,6 +70,18 @@ export class UploadService {
         res => console.log(res)
     );
 
+  }
+
+  public  fileUrl;
+  
+  public download(){
+    
+  }
+  ngOnInit() {
+    const data = 'some text';
+    const blob = new Blob([data], { type: 'application/octet-stream' });
+
+    this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
   
 }
