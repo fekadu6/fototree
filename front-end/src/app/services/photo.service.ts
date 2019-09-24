@@ -8,7 +8,7 @@ import { User } from "../model/user";
 export class PhotoService {
   user: User = {
     _id: "5d88f3a21264c40b56c25a51",
-    email: "ozbudakfurkan@gmail.com"
+    email: "hau@mum.edu"
   };
   constructor(private http: HttpClient) {}
 

@@ -10,6 +10,8 @@
   <div>
     <mat-card-actions>
       <a (click)="onPhotoClick()" [routerLink]="['photodetail']">view</a>
+
+          <app-photodetail [photo]="photo"></app-photodetail>
       <button mat-button>Delete</button>
     </mat-card-actions>
   </div>

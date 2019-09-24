@@ -102,7 +102,7 @@ router.patch('/comment/:email/:photo_id', async (req, res, next) => {
         return res.json(error);
       }
     });
-}
+  }
 );
 
 //like a photo

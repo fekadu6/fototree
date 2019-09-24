@@ -12,10 +12,10 @@ export class OnephotoComponent implements OnInit {
 
   ngOnInit() {}
 
-  onPhotoClick() {
-    console.log("In photo click event.");
-    console.log(this.photo.email);
-    console.log(this.photo._id);
-    this.service.setData({ email: this.photo.email, photo_id: this.photo._id });
-  }
+  // onPhotoClick() {
+  //   console.log("In photo click event.");
+  //   console.log(this.photo.email);
+  //   console.log(this.photo._id);
+  //   this.service.setData({ email: this.photo.email, photo_id: this.photo._id });
+  // }
 }

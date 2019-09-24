@@ -61,6 +61,11 @@
       >
 
       <!-- <app-file-upload></app-file-upload> -->
+      
+        <input [formControl]="signupForm.get('profilePic')" (change)="onFileSeclected($event)" accept="image/*" name="profilePic" type="file" class="ng-hide">
+     
+    
+      <mat-error *ngIf="signupForm.get('profilePic').hasError('invalid')">Error</mat-error>
 
       <label id="radio-group-label">Payment method: </label>
       <mat-radio-group formControlName="cardType">

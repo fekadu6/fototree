@@ -18,7 +18,7 @@ import { EmailAndPhotoIDService } from "./email-and-photo-id.service";
   styleUrls: ["./photodetail.component.css"]
 })
 export class PhotodetailComponent implements OnInit, OnDestroy {
-  @Input() param;
+  @Input() photo:any;
 
   email: String;
   photoID: any;
@@ -56,8 +56,8 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.photoID = "5d8a17ba83a1a000e0daf291";
-    this.email = "ozbudakfurkan@gmail.com";
+    this.photoID = "5d88f3bc1264c40b56c25a52";
+    this.email = "hau@mum.edu";
 
     //read ids from url
     this.routeParamsSub = this.route.params.subscribe(params => {
