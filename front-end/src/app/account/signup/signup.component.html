@@ -19,7 +19,9 @@
           [formControl]="signupForm.get('fname')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('fname').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('fname').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <mat-form-field class="controls">
         <input
@@ -30,7 +32,9 @@
           [formControl]="signupForm.get('lname')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('lname').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('lname').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <mat-form-field class="controls">
         <input
@@ -52,7 +56,9 @@
         />
       </mat-form-field>
 
-      <div *ngIf="signupForm.get('password').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('password').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <!-- <app-file-upload></app-file-upload> -->
 
@@ -80,7 +86,9 @@
           [formControl]="signupForm.get('cardNumber')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('cardNumber').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('cardNumber').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <mat-form-field class="controls">
         <input
@@ -91,7 +99,9 @@
           [formControl]="signupForm.get('secNumber')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('secNumber').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('secNumber').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <mat-form-field class="controls">
         <input
@@ -102,7 +112,9 @@
           [formControl]="signupForm.get('expiryDate')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('expiryDate').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('expiryDate').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <mat-form-field class="controls">
         <input
@@ -113,7 +125,9 @@
           [formControl]="signupForm.get('nameOnCard')"
       /></mat-form-field>
 
-      <div *ngIf="signupForm.get('nameOnCard').hasError('invalid')">Error</div>
+      <mat-error *ngIf="signupForm.get('nameOnCard').hasError('invalid')"
+        >Error</mat-error
+      >
 
       <button
         mat-raised-button

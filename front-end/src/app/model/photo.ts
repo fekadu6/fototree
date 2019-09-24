@@ -6,4 +6,5 @@ export interface Photo {
   description: string;
   price: number;
   likes: number;
+  comments: [];
 }

@@ -1,36 +1,22 @@
 <div class="category-card">
-  <img
-    mat-card-image
-    src="{{ photo }}"
-    class="photo"
-    alt="Photo of a Shiba Inu"
-  />
-  <div class="photo-caption mat-body-1">Photo by Furcan and Hau</div>
   <div>
-    <button mat-button class="btn-photo-info">
-      <span class="mat-body-1">2k</span> LIKE
-    </button>
-    <button mat-button class="btn-photo-info">
+    <img
+      mat-card-image
+      src="{{ photo.url }}"
+      class="photo"
+      alt="{{ photo.title }}"
+    />
+  </div>
+  <div class="photo-caption mat-body-1">{{ photo.category }}</div>
+  <div class="row">
+    <div class="left">
+      <span class="mat-body-1">{{ photo.likes }}</span> LIKES
+    </div>
+    <!-- <button mat-button class="btn-photo-info">
       <span class="mat-body-1">32k</span> VIEWS
+    </button> -->
+    <button mat-stroked-button class="right" (click)="addToCart(photo)">
+      Add to cart
     </button>
-    <button mat-button class="btn-photo-info">* * * *</button>
   </div>
 </div>
-<!-- <div fxFlex="20%" class="item">
-  <img
-    mat-card-image
-    src="{{ photo }}"
-    class="img"
-    alt="Photo of a Shiba Inu"
-  />
-  <div class="photo-caption mat-body-1">Photo by Furcan and Hau</div>
-  <div>
-    <button mat-button class="btn-photo-info">
-      <span class="mat-body-1">2k</span> LIKE
-    </button>
-    <button mat-button class="btn-photo-info">
-      <span class="mat-body-1">32k</span> VIEWS
-    </button>
-    <button mat-button class="btn-photo-info">* * * *</button>
-  </div>
-</div> -->

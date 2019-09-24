@@ -28,7 +28,6 @@ import { SearchComponent } from "../home/category/search/search.component";
     CategoryComponent,
     CategoryListComponent,
     LoadingSpinnerComponent,
-    FileUploadComponent,
     CartComponent,
     CartItemComponent,
     CheckoutComponent,

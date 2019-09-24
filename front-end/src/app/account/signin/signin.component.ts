@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { Subscription } from "rxjs";
@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
   templateUrl: "./signin.component.html",
   styleUrls: ["./signin.component.css"]
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
   signinForm: FormGroup;
   isLoading: boolean = false;
   error: string = null;
@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
       ],
       password: ["", Validators.required]
     });
-    console.log("Sign up page loaded");
+    console.log("Sign in page loaded");
   }
 
   ngOnInit() {}
@@ -59,5 +59,9 @@ export class SigninComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.userStateSubscription.unsubscribe();
   }
 }

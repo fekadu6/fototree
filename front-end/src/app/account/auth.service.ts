@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
+import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { UserState } from "../model/user_state";
 
@@ -16,22 +17,11 @@ export interface AuthResponseData {
 export class AuthService {
   private userStateInfo;
 
-  //  private token: string = "";
-  private responseMessage;
-
   private userState$ = new Subject<UserState>();
 
   baseUrl: string = "http://localhost:3000/fototree-api";
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  // getToken() {
-  //   return this.token;
-  // }
-
-  // getUserId() {
-  //   return this.userId;
-  // }
 
   getUserState() {
     return this.userState$.asObservable();
@@ -44,37 +34,35 @@ export class AuthService {
       .post<{ message: string; token: string }>(this.baseUrl + "/signin", user)
       .subscribe(response => {
         console.log("login response:", response);
-
+        let newUserStateInfo;
         if (!response) {
-          this.responseMessage = "";
+          newUserStateInfo = null;
+        } else {
+          newUserStateInfo = {
+            userId: user.email,
+            token: response.token,
+            message: response.message
+          };
         }
 
-        const newUserStateInfo = {
-          userId: user.email,
-          token: response.token,
-          message: response.message
-        };
+        this.userStateInfo = newUserStateInfo;
 
-        this.responseMessage = response.message;
+        this.userState$.next(this.userStateInfo);
 
-        this.userState$.next(newUserStateInfo);
-
-        //console.log("logged in user", this.getUserId());
+        console.log("logged in user", this.userStateInfo);
       });
-
-    //return this.responseMessage;
   }
 
   signUp(user) {
     this.http.post(this.baseUrl + "/signup", user).subscribe(response => {
       console.log(response);
-      this.responseMessage = response;
+      this.router.navigate(["/signin"]);
     });
-    return this.responseMessage;
   }
 
   logOut() {
-    this.userState$.next(null);
+    this.userStateInfo = null;
+    this.userState$.next(this.userStateInfo);
     this.router.navigate(["/home"]);
   }
 }

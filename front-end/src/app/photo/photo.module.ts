@@ -5,15 +5,15 @@ import { PhotodetailComponent } from "./photodetail/photodetail.component";
 import { RouterModule } from "@angular/router";
 import { CartComponent } from "./shopping-cart/cart/cart.component";
 import { CheckoutComponent } from "./shopping-cart/checkout/checkout.component";
-import { CheckoutConfirmationComponent } from './shopping-cart/checkout-confirmation/checkout-confirmation.component';
+import { CheckoutConfirmationComponent } from "./shopping-cart/checkout-confirmation/checkout-confirmation.component";
 
 @NgModule({
   declarations: [
     FileUploadComponent,
-    PhotodetailComponent,
-    CartComponent,
-    CheckoutComponent,
-    CheckoutConfirmationComponent
+    PhotodetailComponent
+    // CartComponent,
+    // CheckoutComponent,
+    // CheckoutConfirmationComponent
   ],
   imports: [CommonModule, RouterModule]
 })

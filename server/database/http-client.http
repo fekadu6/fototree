@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 #### get cart items by user id
 
-GET http://localhost:3000/fototree-api/cart/get/5d865a91f749410facbb699c HTTP/1.1
+GET http://localhost:3000/fototree-api/cart/get/fekaduw@mum.edu HTTP/1.1
 
 
 ### delete cart item by user id and cart item id
