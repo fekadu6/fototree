@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
+import { UploadService } from "src/app/upload/upload.service";
 // import { UploadService } from '../../upload/upload.service';
 
 @Component({
@@ -12,9 +13,11 @@ export class PostphotoComponent implements OnInit {
   postPhotoForm: FormGroup;
   cats = ["Animal/WildLife", "Beatiful/Fashion", "Holiday", "Sport/Recreation"];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
-    //, public uploadService:UploadService){
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    public uploadService: UploadService
+  ) {
     this.postPhotoForm = formBuilder.group({
       title: [""],
       desc: [""],
@@ -44,13 +47,14 @@ export class PostphotoComponent implements OnInit {
       };
 
       //post to API
-      const url = "http://localhost:3000/api/photos";
+
+      const url = "http://localhost:3000/fototree-api/photos";
 
       this.http.post(url, newPhoto).subscribe(response => {
         console.log("Response:", response);
 
         //upload photo
-        //this.uploadService.uploadFile(this.selectedFile);
+        this.uploadService.uploadFile(this.selectedFile);
       });
     }
   }

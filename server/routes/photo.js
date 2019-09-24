@@ -4,54 +4,49 @@ const ObjectID = require("mongodb").ObjectID;
 
 //get all photos
 router.get("/photos", (req, res) => {
-  User.find({}, { email: 1, fname: 1, lname: 1, uploaded_photos: 1 }).then(
-    photos => {
-      if (!photos) {
-        return res.json({ message: "No photo found" });
-      }
-      //console.log(photos);
-      res.json(photos);
-    }
-  );
-});
+
+    User.find({}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
+        if(!photos){
+            return res.json({"message":"not found photo "})
+        }
+        res.json(photos);
+    });
+})
 
 //get list of photos by user uploaded
 router.get("/photos/:email", (req, res) => {
-  console.log(req.param.email);
-  User.find({ email: req.params.email }, { uploaded_photos: 1 }).then(
-    photos => {
-      if (!photos) {
-        return res.json({ message: "not found photo" });
-      }
-      const uploaded_photos = photos.map(p => p.uploaded_photos);
-      res.json({ photos: uploaded_photos });
-    }
-  );
-});
+        console.log(req.params.email);
+        User.find({email: req.params.email}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
+            if(!photos){
+                return res.json({"message":"not found photo"})
+            }
+
+            res.json(photos);
+        });
+})
 
 //upload photo
-router.post("/photos", (req, res) => {
-  let message = {};
+router.post("/photos",(req, res) => {
+    let message = {};
 
-  console.log(req.body.email);
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (!user) {
-        return res.json({ message: "not found photo" });
-      }
-      if (req.body.photo) user.uploaded_photos.push(req.body.photo);
+    console.log(req.body.email);
+    User.findOne({email: req.body.email}).then(user=> {
+        if(!user){
+            return res.json({"message":"not found photo"})
+        }
+        if(req.body.photo) user.uploaded_photos.push(req.body.photo);
 
-      user.save(err => {
-        if (err) messge = { message: "Upload fail" };
+        user.save((err) =>{
+            if(err) messge = {"message":"Upload fail"};
 
-        message = { message: "Upload successfully!" };
-        res.json(message);
-      });
-    })
-    .catch(e => {
-      console.log("error", e);
+            message = {"message":"Pushed photo successfully!"};
+            res.json(message);
+        })
+
+    }).catch(e => {
+        console.log("error",e);
     });
-});
+})
 
 //get details of a specific photo
 router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
@@ -92,29 +87,19 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
 });
 
 //comment a photo
-router.patch(
-  "/photodetail/:email/:photo_id/:comment",
-  async (req, res, next) => {
-    console.log("photo detail commenting start");
-    let email = req.params.email;
-    let photoID = new ObjectID(req.params.photo_id);
-    let comment = req.params.comment;
-    console.log("comment: ", comment);
-    let date = new Date(Date.now()).toLocaleString();
-    console.log("date: ", date);
-    User.updateOne(
-      { email: email, "uploaded_photos._id": photoID },
-      {
-        $push: {
-          "uploaded_photos.$.comments": { comment: comment, date: date }
-        }
-      },
-      function(error, data) {
-        if (error) {
-          return res.json(error);
-        }
-        res.json("Comment is added.");
-        console.log("photo detail commenting end");
+router.patch('/comment/:email/:photo_id', async (req, res, next) => {
+  console.log("photo detail commenting start");
+  let email = req.params.email;
+  let photoID = new ObjectID(req.params.photo_id);
+  let comment = req.body.comment;
+  console.log("comment: ", comment);
+  let date = new Date(Date.now()).toLocaleString();
+  console.log("date: ", date);
+  User.updateOne({ "email": email, "uploaded_photos._id": photoID },
+    { "$push": { "uploaded_photos.$.comments": { "comment": comment, "date": date } } },
+    function (error, data) {
+      if (error) {
+        return res.json(error);
       }
     );
   }

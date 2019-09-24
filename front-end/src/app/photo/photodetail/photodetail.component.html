@@ -2,11 +2,48 @@
 <a *ngFor="let product of products" [routerLink]="['/product-details', product.id]">
     {{ product.name }}
 </a> 
-
 <h1>{{ za }}</h1>
-<br />
-<h1>{{ data.fname }} &nbsp; {{ data.lname }}</h1>
-<br />
-<h1>{{ data.email }}</h1>
 
- <div *ngFor="let comment of comments"></div> -->
+-->
+
+<img
+  src="{{ user_photo }}"
+  alt="User profile picture "
+/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span>{{ fname }} {{ lname }}</span>
+<br /><br />
+
+<p>Category: {{ category }}</p>
+
+<p>Description: {{ description }}</p>
+
+<p>Price: {{ price }}$</p>
+
+<br />
+<img src="{{ photo_url }}" alt="Photo placeholder" />;
+<p>Likes: &nbsp;&nbsp;&nbsp;{{ likes }}</p>
+
+<h4>Comments:</h4>
+<Br />
+<ul>
+  <li *ngFor="let comment of comments">
+    {{ comment.comment }} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ comment.date }}
+    <br /><br /><br /><br />
+  </li>
+</ul>
+
+<button *ngIf="addCommentButton" (click)="onComment()">Add a Comment</button>
+<textarea *ngIf="commentTextbox" #text (keyup)="onKey($event)"> </textarea>
+<br />
+<br />
+<button *ngIf="postCommentButton" (click)="onCommentPost()">
+  Post
+</button>
+<br />
+<p *ngIf="feedbackText">Thanks for the feedback!</p>

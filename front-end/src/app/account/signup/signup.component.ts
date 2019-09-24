@@ -19,6 +19,8 @@ export class SignupComponent implements OnInit {
   error: string = null;
   isLoading: boolean = false;
 
+  selectedFile: File = null;
+  
   //card types
   cardTypes: string[] = ["PayPal", "Visa", "Master"];
 
@@ -41,7 +43,7 @@ export class SignupComponent implements OnInit {
       fname: ["", Validators.required],
       lname: ["", Validators.required],
       //profilePic: ["", [Validators.required, requiredFileType('png')]],
-      //profilePic: ["", Validators.required],
+      profilePic: ["", Validators.required],
       cardType: [""],
       cardNumber: ["", Validators.nullValidator],
       secNumber: ["", Validators.nullValidator],
@@ -84,5 +86,9 @@ export class SignupComponent implements OnInit {
       //        this.isLoading = false;
       //}
     });
+  }
+
+  onFileSeclected(event){
+    this.selectedFile = <File> event.target.files[0];
   }
 }

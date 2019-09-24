@@ -18,7 +18,9 @@ import { GlobalItems } from "./model/BASE_URL";
     AppComponent,
     FooterComponent,
     PageNotFoundComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    FooterComponent
+    
   ],
   imports: [
     BrowserModule,
