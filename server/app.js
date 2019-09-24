@@ -15,10 +15,13 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
+
+app.use(express.static('public'))
+
 app.disable("X-Powered-By");
 //todo: add X-Powered By prottection, ETag, etc...
 
-app.use("/fototree-api/upload",uploadRouter);
+app.use("/fototree-api/upload", uploadRouter);
 app.use("/fototree-api", mainRouter);
 app.use("/fototree-api", photoRouter);
 
