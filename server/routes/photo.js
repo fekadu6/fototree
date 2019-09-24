@@ -1,29 +1,30 @@
 
 const User = require("./../model/user");
 const router = require('express').Router();
-
+const fs = require('fs');
+const path = require("path");
 
 
 //get all photos
 router.get("/photos", (req, res) => {
     
-    User.find({}, {email:1, uploaded_photos:1}).then(photos=> {
+    User.find({}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
         if(!photos){
             return res.json({"message":"not foudn "})
         }
-        res.json({photos:photos});
+        res.json(photos);
     });
 })
 
 //get list of photos by user uploaded
 router.get("/photos/:email", (req, res) => {
         console.log(req.param.email);
-        User.find({email: req.params.email}, {uploaded_photos:1}).then(photos=> {
+        User.find({email: req.params.email}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
             if(!photos){
                 return res.json({"message":"not found photo"})
             }
-            const uploaded_photos = photos.map(p => p.uploaded_photos);
-            res.json({photos:uploaded_photos});
+            //const uploaded_photos = photos.map(p => p.uploaded_photos);
+            res.json(photos);
         });
 })
 
@@ -41,7 +42,7 @@ router.post("/photos",(req, res) => {
         user.save((err) =>{
             if(err) messge = {"message":"Upload fail"};
             
-            message = {"message":"Upload successfully!"};
+            message = {"message":"Pushed photo successfully!"};
             res.json(message);
         })
         

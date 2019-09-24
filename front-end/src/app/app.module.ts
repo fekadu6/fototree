@@ -13,6 +13,10 @@ import { SearchComponent } from "./navigation/search/search.component";
 import { FooterComponent } from "./navigation/footer/footer.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { NavigationModule } from "./navigation/navigation.module";
+import { PhotoModule } from './photo/photo.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { NavigationModule } from "./navigation/navigation.module";
     SearchComponent,
     FooterComponent,
     PageNotFoundComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    FooterComponent
+    
   ],
   imports: [
     BrowserModule,
