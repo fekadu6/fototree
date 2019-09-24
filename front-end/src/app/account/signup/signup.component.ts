@@ -89,14 +89,8 @@ export class SignupComponent implements OnInit {
         console.log(response);
         
       }
-      //else {
-      //  this.error = response;
-      //        this.isLoading = false;
-      //}
+     
     });
   }
-
-  
-
 
 }

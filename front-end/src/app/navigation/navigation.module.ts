@@ -9,9 +9,9 @@ import { CategoryComponent } from "../home/category/category.component";
 import { CategoryListComponent } from "../home/category/category-list/category-list.component";
 import { MaterialModule } from "../material/material.module";
 import { SidenavListComponent } from "./sidenav-list/sidenav-list.component";
-import { PostphotoComponent } from '../photo/postphoto/postphoto.component';
-import { PhotoModule } from '../photo/photo.module';
-import { ViewphotoComponent } from '../photo/viewphoto/viewphoto.component';
+import { PostphotoComponent } from "../photo/postphoto/postphoto.component";
+import { PhotoModule } from "../photo/photo.module";
+import { ViewphotoComponent } from "../photo/viewphoto/viewphoto.component";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
@@ -55,15 +55,12 @@ import { SearchComponent } from "../home/category/search/search.component";
         path: "home",
         component: HomeComponent
       },
-      { path: "postphoto", component:PostphotoComponent },
-      { path: "viewphoto", component:ViewphotoComponent,
-        children:[
-          {path:"postphoto", component: PostphotoComponent},
-          {path:"viewphoto", component:ViewphotoComponent}
-        ]
+      { path: "postphoto", component: PostphotoComponent },
+      {
+        path: "viewphoto",
+        component: ViewphotoComponent
       },
-     
-      { path: "photo_details", component: PhotodetailComponent },
+
       {
         path: "cart",
         component: CartComponent

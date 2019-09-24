@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { GlobalItems } from '../model/BASE_URL';
 
 const url = 'http://localhost:3000/fototree-api/upload';
 

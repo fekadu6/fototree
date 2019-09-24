@@ -24,4 +24,15 @@ export class PhotodetailService {
       }
     );
   }
+
+  postLike(email, photo_id) {
+    return this.http.patch(`${this.url}/${email}/${photo_id}`, {});
+  }
+
+  postDislike(email, photo_id) {
+    return this.http.patch(
+      `http://localhost:3000/fototree-api/dislike/${email}/${photo_id}`,
+      {}
+    );
+  }
 }
