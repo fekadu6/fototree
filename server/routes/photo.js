@@ -84,11 +84,11 @@ router.get('/photodetail/:email/:photo_id', async (req, res, next) => {
 });
 
 //comment a photo
-router.patch('/photodetail/:email/:photo_id/:comment', async (req, res, next) => {
+router.patch('/comment/:email/:photo_id', async (req, res, next) => {
   console.log("photo detail commenting start");
   let email = req.params.email;
   let photoID = new ObjectID(req.params.photo_id);
-  let comment = req.params.comment;
+  let comment = req.body.comment;
   console.log("comment: ", comment);
   let date = new Date(Date.now()).toLocaleString();
   console.log("date: ", date);

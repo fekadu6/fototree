@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef,
+  ElementRef
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { PhotodetailService } from "./photodetail.service";
@@ -12,8 +19,25 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   email: String;
   photoID: any;
   routeParamsSub: any;
-  data;
-  za = "Zaaaa";
+  data: any;
+
+  addCommentButton = true;
+  postCommentButton = false;
+  feedbackText = false;
+
+  fname;
+  lname;
+  likes;
+  comments;
+  photo_url;
+  user_photo;
+  description;
+  category;
+  price;
+  commentTextbox = false;
+
+  commentList;
+  input;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,8 +46,8 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.photoID = "5d8911055fb8813eb0ae8a0d";
-    this.email = "firstlast@gmail.com";
+    this.photoID = "5d8a17ba83a1a000e0daf291";
+    this.email = "ozbudakfurkan@gmail.com";
 
     //read ids from url
     this.routeParamsSub = this.route.params.subscribe(params => {
@@ -36,12 +60,60 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.data = response;
         console.log(response);
-        // console.log("first name: " + response.fname);
-        // console.log("last name: " + response.lname);
-        // console.log("email: " + response.photo_likes);
+
+        this.fname = response.fname;
+        this.lname = response.lname;
+        this.likes = response.photo_likes;
+        this.comments = response.photo_comments;
+        this.photo_url = response.photo_url;
+        this.user_photo = response.profile_picture;
+        this.description = response.photo_description;
+        this.category = response.photo_category;
+        this.price = response.photo_price;
+
+        this.commentList = response.photo_comments;
+
+        console.log("first name: " + this.fname);
+        console.log("last name: " + this.lname);
+        console.log("likes: " + this.likes);
+        console.log("comments:" + this.commentList);
+        //console.log("comments: " + this.comments);
       });
   }
   ngOnDestroy(): void {
     this.routeParamsSub.unsubscribe();
+  }
+
+  onComment() {
+    console.log("clicked.");
+    this.addCommentButton = false;
+    this.postCommentButton = true;
+    this.commentTextbox = true;
+    this.feedbackText = false;
+  }
+
+  onCommentPost() {
+    console.log("posted.");
+    this.addCommentButton = true;
+    this.postCommentButton = false;
+    this.commentTextbox = false;
+    this.feedbackText = true;
+
+    let commentObject = {
+      comment: this.input,
+      date: new Date(Date.now()).toLocaleString()
+    };
+    this.commentList.push(commentObject);
+    console.log("comments after push : " + this.commentList);
+
+    this.photoService
+      .postComment(this.email, this.photoID, this.input)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+  onKey(event) {
+    this.input = event.target.value;
   }
 }
