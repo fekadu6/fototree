@@ -28,13 +28,22 @@ router.post("/signin", async (req, res) => {
     })
     .then(result => {
       if (!result) {
-        return res.json({ message: "Unsuccessful login attempt" });
+        return res.json({
+          userId: email,
+          message: "Unsuccessful login attempt"
+        });
       }
 
       token = getToken(user.email, user._id);
       console.log({ message: "Successfully logged in", token: token });
 
-      res.status(200).json({ message: "Successfully logged in", token: token });
+      res
+        .status(200)
+        .json({
+          userId: email,
+          message: "Successfully logged in",
+          token: token
+        });
     })
     .catch(err => res.json({ error: err }));
 });
@@ -155,7 +164,6 @@ router.delete("/cart/delete/:userId/:cartItemId", async (req, res) => {
     })
     .catch(error => res.status(401).json(error));
 });
-
 
 router.post("/cart/checkout", async (req, res) => {
   const userId = req.body.userId;
