@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { toFormData } from "src/app/photo/file-upload/form_data";
+import { UploadService } from '../../upload/upload.service';
 
 @Component({
   selector: "app-signup",
@@ -18,14 +19,13 @@ export class SignupComponent implements OnInit {
   error: string = null;
   isLoading: boolean = false;
 
-  selectedFile: File = null;
-  
   //card types
   cardTypes: string[] = ["PayPal", "Visa", "Master"];
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private uploadService: UploadService
   ) {
     this.signupForm = formBuilder.group({
       email: [
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
       fname: ["", Validators.required],
       lname: ["", Validators.required],
       //profilePic: ["", [Validators.required, requiredFileType('png')]],
-      profilePic: ["", Validators.required],
+      profilePic: [""],
       cardType: [""],
       cardNumber: ["", Validators.nullValidator],
       secNumber: ["", Validators.nullValidator],
@@ -82,9 +82,16 @@ export class SignupComponent implements OnInit {
     //   this.error = response;
     //   this.isLoading = false;
     // }
+
+    //upload photo
+    this.uploadService.uploadFile(this.selectedFile);
   }
 
-  onFileSeclected(event){
+  selectedFile: File = null;
+  public onFileSeclected(event){
     this.selectedFile = <File> event.target.files[0];
+   
   }
+
+
 }
