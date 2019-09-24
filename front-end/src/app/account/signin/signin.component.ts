@@ -34,20 +34,19 @@ export class SigninComponent implements OnInit, OnDestroy {
       ],
       password: ["", Validators.required]
     });
-    console.log("Sign in page loaded");
   }
 
   ngOnInit() {
     this.userState$ = this.authService.getUserState();
     this.userStateSubscription = this.userState$.subscribe(userState => {
-      console.log({ userState });
+      //console.log({ userState });
       if (userState.token) {
         this.isLoading = false;
-        console.log({ token: userState.token });
-        this.router.navigate(["/cart"]);
-      } else {
-        //this.error = "Error: check your user name or password";
-        // this.isLoading = true;
+        //console.log({ token: userState.token });
+
+        this.authService.setUserState(this.userState$);
+
+        this.router.navigate(["/viewphoto"]);
       }
     });
   }
@@ -61,7 +60,6 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.authService.signIn(account).subscribe(response => {
-      console.log("login response:", response);
       let newUserStateInfo;
       if (!response) {
         newUserStateInfo = null;
@@ -73,11 +71,7 @@ export class SigninComponent implements OnInit, OnDestroy {
         };
       }
 
-      //this.userStateInfo = newUserStateInfo;
-      console.log({ newUserStateInfo });
       this.userState$.next(newUserStateInfo);
-
-      console.log("A");
     });
   }
 

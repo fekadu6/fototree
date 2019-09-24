@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Photo } from "src/app/model/photo";
 import { CartService } from "../cart.service";
-import { Subscription } from "rxjs";
+import { Subscription, BehaviorSubject } from "rxjs";
 import { AuthService } from "src/app/account/auth.service";
 import { Router } from "@angular/router";
+import { UserState } from "src/app/model/user_state";
 
 @Component({
   selector: "app-checkout",
@@ -16,8 +17,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   total: number = 0;
   tax: number = 0.07;
 
-  cartItemSubscription = new Subscription();
-  userStateSubscription = new Subscription();
+  cartItemSubscription: Subscription;
+  cartItem$: BehaviorSubject<Photo>;
+
+  userStateSubscription: Subscription;
+  userState$: BehaviorSubject<UserState>;
 
   constructor(
     private cartService: CartService,
@@ -26,7 +30,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getCartItems();
+    this.userState$ = this.authService.getUserState();
+    console.log("Logged in user: ", this.userState$);
+    this.cartService.getCarts().subscribe(carts => {
+      console.log("Cart items:", carts.cart);
+      this.cartItems = carts.cart;
+    });
   }
 
   getSubTotal() {
@@ -43,34 +52,35 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     return this.tax * this.getSubTotal();
   }
 
-  getCartItems() {
-    //this.cartService.getCarts();
-    this.cartItemSubscription = this.cartService
-      .getCartUpdated()
-      .subscribe(carts => {
-        console.log("Cart items:", carts);
-        this.cartItems = carts;
-      });
-  }
+  // .subscribe(cartItems => {
+  //   console.log("user id:", userState.userId);
+  //   console.log("cart items:", cartItems);
+  //   if (!cartItems) {
+  //     this.cart = [];
+  //   }
+  //   this.cart = cartItems.cart;
+  //   this.cartUpdated$.next([...this.cart]);
+  // });
 
   ngOnDestroy() {
-    this.cartItemSubscription.unsubscribe();
-    this.userStateSubscription.unsubscribe();
+    // this.cartItemSubscription.unsubscribe();
+    // this.userStateSubscription.unsubscribe();
   }
 
   addBoughtPhotos() {
-    this.userStateSubscription = this.authService
-      .getUserState()
-      .subscribe(userState => {
-        const photoDetail = {
-          userId: userState.userId,
-          photos: this.cartItems
-        };
+    this.userState$.subscribe(userState => {
+      const photoDetail = {
+        userId: userState.userId,
+        photos: this.cartItems
+      };
 
-        console.log("Photo detail: ", photoDetail);
-        this.cartService.addBoughtPhotos(photoDetail);
+      console.log("Photo detail: ", photoDetail);
+      this.cartService.addBoughtPhotos(photoDetail);
 
-        this.router.navigate(["/checkout-confirmation"]);
-      });
+      this.router.navigate([
+        "/checkout-confirmation",
+        photoDetail.photos[0].url
+      ]);
+    });
   }
 }

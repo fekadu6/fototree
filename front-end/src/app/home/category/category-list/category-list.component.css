@@ -4,7 +4,7 @@
 .mat-card-image  */
  {
   width: 300px;
-  height: 300px;
+  height: 350px;
   cursor: pointer;
   margin: auto;
 }
@@ -38,7 +38,7 @@
   color: #c7c7c7;
   width: 300px;
   position: absolute;
-  top: 30px;
+  top: 60px;
   z-index: 3;
 
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */

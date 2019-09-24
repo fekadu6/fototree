@@ -16,7 +16,7 @@ import {
   MatRadioModule
 } from "@angular/material";
 
-import {MatFileUploadModule} from 'angular-material-fileupload';
+//import {MatFileUploadModule} from 'angular-material-fileupload';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 
@@ -36,7 +36,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FlexLayoutModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatFileUploadModule,
+    //MatFileUploadModule,
     MatDialogModule,
     MatChipsModule,
     MatRadioModule
@@ -56,7 +56,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatSelectModule,
     MatFormFieldModule,
     MatRadioModule,
-    MatFileUploadModule,
+    //MatFileUploadModule,
     MatDialogModule,
     MatChipsModule
   ]

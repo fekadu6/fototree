@@ -4,6 +4,7 @@ import { BehaviorSubject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { UserState } from "../model/user_state";
+import { GlobalItems } from "../model/BASE_URL";
 
 export interface AuthResponseData {
   email: string;
@@ -26,48 +27,34 @@ export class AuthService {
     UserState
   >(this.userStateInfo);
 
-  baseUrl: string = "http://localhost:3000/fototree-api";
+  //baseUrl: string = "http://localhost:3000/fototree-api";
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private globalItems: GlobalItems,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
-  // getUserState() {
-  //   return this.userState$.asObservable();
-  // }
+  setUserState(userState$: BehaviorSubject<UserState>) {
+    this.userState$ = userState$;
+  }
 
   signIn(user) {
-    console.log("User info:", user);
+    //console.log("User info:", user);
 
     return this.http.post<{ userId: string; message: string; token: string }>(
-      this.baseUrl + "/signin",
+      this.globalItems.BASE_URL + "/signin",
       user
     );
-    // .subscribe(response => {
-    //   console.log("login response:", response);
-    //   let newUserStateInfo;
-    //   if (!response) {
-    //     newUserStateInfo = null;
-    //   } else {
-    //     newUserStateInfo = {
-    //       userId: user.email,
-    //       token: response.token,
-    //       message: response.message
-    //     };
-    //   }
-
-    //   this.userStateInfo = newUserStateInfo;
-
-    //   this.userState$.next(this.userStateInfo);
-
-    //   console.log("A", this.userStateInfo);
-    // });
   }
 
   getUserState() {
+    //console.log("User state on authService:", this.userState$);
     return this.userState$;
   }
 
   signUp(user) {
-    return this.http.post(this.baseUrl + "/signup", user);
+    return this.http.post(this.globalItems.BASE_URL + "/signup", user);
   }
 
   logOut() {

@@ -37,13 +37,11 @@ router.post("/signin", async (req, res) => {
       token = getToken(user.email, user._id);
       console.log({ message: "Successfully logged in", token: token });
 
-      res
-        .status(200)
-        .json({
-          userId: email,
-          message: "Successfully logged in",
-          token: token
-        });
+      res.status(200).json({
+        userId: email,
+        message: "Successfully logged in",
+        token: token
+      });
     })
     .catch(err => res.json({ error: err }));
 });
@@ -89,7 +87,7 @@ router.post("/signup", async (req, res) => {
 //add shopping cart items
 router.post("/cart/add", async (req, res) => {
   const userId = req.body.userId;
-
+  console.log(userId);
   await User.findOne({ email: userId })
     .then(user => {
       if (!user) {

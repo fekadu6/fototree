@@ -11,7 +11,7 @@ import { UploadService } from "src/app/upload/upload.service";
 })
 export class PostphotoComponent implements OnInit {
   postPhotoForm: FormGroup;
-  cats = ["Animal/WildLife", "Beatiful/Fashion", "Holiday", "Sport/Recreation"];
+  cats = ["Animal/WildLife", "Beauty/Fashion", "Holiday", "Sports/Recreation"];
 
   constructor(
     private formBuilder: FormBuilder,

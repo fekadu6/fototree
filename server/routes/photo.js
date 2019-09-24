@@ -4,49 +4,57 @@ const ObjectID = require("mongodb").ObjectID;
 
 //get all photos
 router.get("/photos", (req, res) => {
+  User.find(
+    { "uploaded_photos._id": { $exists: true } },
+    { email: 1, fname: 1, lname: 1, profile_picture: 1, uploaded_photos: 1 }
+  ).then(photos => {
+    if (!photos) {
+      return res.json({ message: "not found photo " });
+    }
 
-    User.find({}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
-        if(!photos){
-            return res.json({"message":"not found photo "})
-        }
-        res.json(photos);
-    });
-})
+    console.log("photo details: ", photos);
+    res.json(photos);
+  });
+});
 
 //get list of photos by user uploaded
 router.get("/photos/:email", (req, res) => {
-        console.log(req.params.email);
-        User.find({email: req.params.email}, {email:1, fname:1, lname:1, profile_picture:1, uploaded_photos:1}).then(photos=> {
-            if(!photos){
-                return res.json({"message":"not found photo"})
-            }
+  console.log(req.params.email);
+  User.find(
+    { email: req.params.email },
+    { email: 1, fname: 1, lname: 1, profile_picture: 1, uploaded_photos: 1 }
+  ).then(photos => {
+    if (!photos) {
+      return res.json({ message: "not found photo" });
+    }
 
-            res.json(photos);
-        });
-})
+    res.json(photos);
+  });
+});
 
 //upload photo
-router.post("/photos",(req, res) => {
-    let message = {};
+router.post("/photos", (req, res) => {
+  let message = {};
 
-    console.log(req.body.email);
-    User.findOne({email: req.body.email}).then(user=> {
-        if(!user){
-            return res.json({"message":"not found photo"})
-        }
-        if(req.body.photo) user.uploaded_photos.push(req.body.photo);
+  console.log(req.body.email);
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.json({ message: "not found photo" });
+      }
+      if (req.body.photo) user.uploaded_photos.push(req.body.photo);
 
-        user.save((err) =>{
-            if(err) messge = {"message":"Upload fail"};
+      user.save(err => {
+        if (err) messge = { message: "Upload fail" };
 
-            message = {"message":"Pushed photo successfully!"};
-            res.json(message);
-        })
-
-    }).catch(e => {
-        console.log("error",e);
+        message = { message: "Pushed photo successfully!" };
+        res.json(message);
+      });
+    })
+    .catch(e => {
+      console.log("error", e);
     });
-})
+});
 
 //get details of a specific photo
 router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
@@ -66,6 +74,10 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
       if (error) {
         return res.json(error);
       }
+      if (data == undefined || data == null) {
+        return res.json("Wrong user email or photo id is inputted.");
+      }
+
       //console.log("comment: ", data.uploaded_photos[0].comments[0]);
       let filteredUser = {
         profile_picture: data.profile_picture,
@@ -87,7 +99,7 @@ router.get("/photodetail/:email/:photo_id", async (req, res, next) => {
 });
 
 //comment a photo
-router.patch('/comment/:email/:photo_id', async (req, res, next) => {
+router.patch("/comment/:email/:photo_id", async (req, res, next) => {
   console.log("photo detail commenting start");
   let email = req.params.email;
   let photoID = new ObjectID(req.params.photo_id);
@@ -95,15 +107,21 @@ router.patch('/comment/:email/:photo_id', async (req, res, next) => {
   console.log("comment: ", comment);
   let date = new Date(Date.now()).toLocaleString();
   console.log("date: ", date);
-  User.updateOne({ "email": email, "uploaded_photos._id": photoID },
-    { "$push": { "uploaded_photos.$.comments": { "comment": comment, "date": date } } },
-    function (error, data) {
+  User.updateOne(
+    { email: email, "uploaded_photos._id": photoID },
+    {
+      $push: { "uploaded_photos.$.comments": { comment: comment, date: date } }
+    },
+    function(error, data) {
       if (error) {
         return res.json(error);
       }
-    );
-  }
-);
+      if (data == undefined || data == null) {
+        return res.json("Wrong user email or photo id is inputted.");
+      }
+    }
+  );
+});
 
 //like a photo
 router.patch("/photodetail/:email/:photo_id", async (req, res, next) => {
@@ -116,6 +134,9 @@ router.patch("/photodetail/:email/:photo_id", async (req, res, next) => {
     function(error, data) {
       if (error) {
         return res.json(error);
+      }
+      if (data == undefined || data == null) {
+        return res.json("Wrong user email or photo id is inputted.");
       }
       console.log("like is added.");
     }
@@ -133,6 +154,9 @@ router.patch("/photodelete/:email/:photo_id/", async (req, res, next) => {
     function(error, data) {
       if (error) {
         return res.json(error);
+      }
+      if (data == undefined || data == null) {
+        return res.json("Wrong user email or photo id is inputted.");
       }
       console.log("photo is deleted.");
     }
@@ -163,6 +187,9 @@ router.patch("/photoupdate/:email/:photo_id/", async (req, res, next) => {
     function(error, data) {
       if (error) {
         return res.json(error);
+      }
+      if (data == undefined || data == null) {
+        return res.json("Wrong user email or photo id is inputted.");
       }
       console.log("photo is updated.");
     }

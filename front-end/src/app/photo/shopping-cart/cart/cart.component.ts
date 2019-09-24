@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Photo } from "src/app/model/photo";
 import { CartService } from "../cart.service";
-import { Subscription } from "rxjs";
+import { Subscription, BehaviorSubject } from "rxjs";
+import { UserState } from "src/app/model/user_state";
+import { AuthService } from "src/app/account/auth.service";
 
 @Component({
   selector: "app-cart",
@@ -10,17 +12,24 @@ import { Subscription } from "rxjs";
 })
 export class CartComponent implements OnInit, OnDestroy {
   cartItems: Photo[];
-  cartItemSubscription = new Subscription();
+  cartItemSubscription: Subscription;
 
-  constructor(private cartService: CartService) {}
+  // userStateSubscription: Subscription;
+  // userState$: BehaviorSubject<UserState>;
+
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
+
   ngOnInit() {
-    this.cartService.getCarts();
-    this.cartItemSubscription = this.cartService
-      .getCartUpdated()
-      .subscribe(carts => {
-        this.cartItems = carts;
-        console.log("Cart items:", carts);
-      });
+    //this.userState$ = this.authService.getUserState();
+
+    this.cartService.getCarts().subscribe(carts => {
+      this.cartItems = carts.cart;
+
+      console.log("Cart items:", carts);
+    });
   }
 
   deletePhoto(photoId) {
@@ -29,6 +38,6 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.cartItemSubscription.unsubscribe();
+    //this.cartItemSubscription.unsubscribe();
   }
 }
