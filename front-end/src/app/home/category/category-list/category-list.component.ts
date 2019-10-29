@@ -51,6 +51,10 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     });
   }
 
+  showDetail(photo) {
+    this.router.navigate(["photo_details", photo]);
+  }
+
   ngOnDestroy() {
     //this.userStateSubscription.unsubscribe();
   }

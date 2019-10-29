@@ -14,8 +14,5 @@ export class CheckoutConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.url = this.activatedRoute.snapshot.paramMap.get("url");
-
-    // route.data includes both `data` and `resolve`
-    const user = this.activatedRoute.data.pipe(map(d => d.user));
   }
 }

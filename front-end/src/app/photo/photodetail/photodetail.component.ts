@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ViewContainerRef,
-  ElementRef,
-  Input
-} from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { PhotodetailService } from "./photodetail.service";
@@ -18,9 +10,11 @@ import { EmailAndPhotoIDService } from "./email-and-photo-id.service";
   styleUrls: ["./photodetail.component.css"]
 })
 export class PhotodetailComponent implements OnInit, OnDestroy {
-  @Input() photo:any;
+  @Input() photo: any;
 
-  email: String;
+  url: string;
+
+  email: string;
   photoID: any;
   routeParamsSub: any;
   data: any;
@@ -52,46 +46,45 @@ export class PhotodetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public photoService: PhotodetailService,
     public http: HttpClient,
-    public photoInfo: EmailAndPhotoIDService
+    public photoInfo: EmailAndPhotoIDService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.url = this.activatedRoute.snapshot.paramMap.get("url");
+
     this.photoID = "5d88f3bc1264c40b56c25a52";
     this.email = "hau@mum.edu";
 
-    //read ids from url
-    this.routeParamsSub = this.route.params.subscribe(params => {
-      //this.userID = params["user_id"];
-      //this.photoID = params["photo_id"];
-    });
+    // this.routeParamsSub = this.route.params.subscribe(params => {
+
+    // });
     //send user id and photo id to server and return photo details object
-    this.photoService
-      .getPhotoDetails(this.email, this.photoID)
-      .subscribe(response => {
-        this.data = response;
-        console.log(response);
+    // this.photoService
+    //   .getPhotoDetails(this.email, this.photoID)
+    //   .subscribe(response => {
+    //     this.data = response;
+    //     // console.log(response);
 
-        this.fname = response.fname;
-        this.lname = response.lname;
-        this.likes = response.photo_likes;
-        this.comments = response.photo_comments;
-        this.photo_url = response.photo_url;
-        this.user_photo = response.profile_picture;
-        this.description = response.photo_description;
-        this.category = response.photo_category;
-        this.price = response.photo_price;
+    //     this.fname = response.fname;
+    //     this.lname = response.lname;
+    //     this.likes = response.photo_likes;
+    //     this.comments = response.photo_comments;
+    //     this.photo_url = response.photo_url;
+    //     this.user_photo = response.profile_picture;
+    //     this.description = response.photo_description;
+    //     this.category = response.photo_category;
+    //     this.price = response.photo_price;
 
-        this.commentList = response.photo_comments;
+    //     this.commentList = response.photo_comments;
+    //   });
 
-        console.log("first name: " + this.fname);
-        console.log("last name: " + this.lname);
-        console.log("likes: " + this.likes);
-        console.log("comments:" + this.commentList);
-        //console.log("comments: " + this.comments);
-      });
+    this.category = this.activatedRoute.snapshot.paramMap.get("category");
+    this.price = this.activatedRoute.snapshot.paramMap.get("price");
+    this.likes = this.activatedRoute.snapshot.paramMap.get("likes");
   }
   ngOnDestroy(): void {
-    this.routeParamsSub.unsubscribe();
+    //this.routeParamsSub.unsubscribe();
   }
 
   onComment() {

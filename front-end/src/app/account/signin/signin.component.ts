@@ -42,6 +42,7 @@ export class SigninComponent implements OnInit, OnDestroy {
       //console.log({ userState });
       if (userState.token) {
         this.isLoading = false;
+
         //console.log({ token: userState.token });
 
         this.authService.setUserState(this.userState$);

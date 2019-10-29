@@ -7,16 +7,18 @@
 
   <!-- Let menu link -->
   <div class="top-menu">
-    <a mat-button [routerLink]="['home']"> Home </a>
+    <a mat-button [routerLink]="['/home']"> Home </a>
     <a mat-button> About Us </a>
     <!-- <a mat-button> Contact Us </a> -->
-    <a mat-button [routerLink]="['postphoto']" *ngIf="loggedIn">
+    <a mat-button [routerLink]="['/postphoto']" *ngIf="loggedIn">
       Upload Photo
     </a>
-    <a mat-button [routerLink]="['viewphoto']" *ngIf="loggedIn"> View Photo </a>
-    <a mat-button [routerLink]="['photo_details']" *ngIf="loggedIn"
+    <a mat-button [routerLink]="['/viewphoto']" *ngIf="loggedIn">
+      View Photo
+    </a>
+    <!-- <a mat-button [routerLink]="['photo_details']" *ngIf="loggedIn"
       >Photo Details</a
-    >
+    > -->
   </div>
   <span class="fill-space"></span>
 

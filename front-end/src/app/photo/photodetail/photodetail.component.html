@@ -1,15 +1,14 @@
 <div class="main-container">
   <div class="left">
-    <img
-      src="https://images.unsplash.com/photo-1569285222040-f416b22f709a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-      alt="Photo placeholder"
-    />;
+    <img [src]="url" alt="Photo placeholder" />
+
     <p>Photographer: Hau Furkan</p>
-    <p>Likes: 3</p>
-    <p>Category: Beauty/Fashion</p>
+    <p>Likes: {{ likes }}</p>
+    <p>Category: {{ category }}</p>
     <p>Description: Some description here...</p>
-    <p>Price: $2</p>
+    <p>Price: {{ price }}</p>
   </div>
+
   <div class="right">
     <h4>Comment(s):</h4>
 
@@ -17,13 +16,17 @@
       <li>{{ comment.comment }} - {{ comment.date }}</li>
     </ul>
 
+    <!-- <mat-form-field class="example-full-width"> -->
+    <!-- <input matInput placeholder="Favorite food" value="Sushi"> -->
     <button mat-raised-button *ngIf="addCommentButton" (click)="onComment()">
       Add a Comment
     </button>
-    <mat-form-field class="comment-textarea">
-      <textarea matInput *ngIf="commentTextbox" #text (keyup)="onKey($event)">
-      </textarea>
-    </mat-form-field>
+    <!-- <mat-form-field class="comment-textarea"> -->
+    <input matInput *ngIf="commentTextbox" #text (keyup)="onKey($event)" />
+
+    <!-- </mat-form-field> -->
+    <!-- </mat-form-field> -->
+
     <br />
     <button
       mat-raised-button

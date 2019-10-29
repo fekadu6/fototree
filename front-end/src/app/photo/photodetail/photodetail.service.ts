@@ -6,12 +6,12 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class PhotodetailService {
-  url = "http://localhost:3000/fototree-api/photodetail";
+  baseUrl = "http://localhost:3000/fototree-api/photodetail";
 
   constructor(public http: HttpClient) {}
 
   getPhotoDetails(email, photo_id): Observable<any> {
-    return this.http.get(`${this.url}/${email}/${photo_id}`);
+    return this.http.get(`${this.baseUrl}/${email}/${photo_id}`);
   }
 
   postComment(email, photo_id, com): Observable<any> {
@@ -26,7 +26,7 @@ export class PhotodetailService {
   }
 
   postLike(email, photo_id) {
-    return this.http.patch(`${this.url}/${email}/${photo_id}`, {});
+    return this.http.patch(`${this.baseUrl}/${email}/${photo_id}`, {});
   }
 
   postDislike(email, photo_id) {

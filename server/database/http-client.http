@@ -16,6 +16,26 @@ Content-Type: application/json
       }
 }
 
+#   {"_id":"5d8a8fad70c3795ad4f55565","fname":"John","lname":"Paul","email":"johnpaul@mum.edu","password":"$2b$12$avsQaQLJ1rzK9ezcr4M74e33daHUy9xwr.nwbzXz.k2YGOZFQBEam","profile_picture":"http://drive.google.com/photos/1","payment_method":{"card_type":"Visa","number":"1234567890123456","secrete_no":"321","expiry_date":"04/21","name_on_the_card":"John Paul"},"uploaded_photos":[{"url":"https://images.unsplash.com/photo-1509224863479-ab583ee78692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80","title":"fall","description":"orange fall","category":"environment","price":"0","likes":"25","comments":[]},
+#   {"url":"https://images.unsplash.com/photo-1491955524898-bdbdb5668abb?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80","title":"town","description":"landscape of sea and town","category":"architecture","price":"5","likes":"5","comments":[]},
+#   {"url":"https://images.unsplash.com/photo-1466496224275-4cbf790b285b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80","title":"owl","description":"owl with flowers","category":"environment","price":"0","likes":"10","comments":[]},
+#   {"url":"https://images.unsplash.com/photo-1464022793855-9b1e5bd1d8d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1311&q=80","title":"mountain","description":"mountain with lake","category":"landscape","price":"7","likes":"30","comments":[]},
+#   {"url":"https://images.unsplash.com/photo-1490465998231-e16519a88298?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80","title":"building night","description":"nice building in the night","category":"architecture","price":"0","likes":"10","comments":[]},
+#   {"url":"https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80.jpg","title":"lady","description":"lady with colorful flowers","category":"portrait","price":"0","likes":"10","comments":[]}],"cart":[],"bought_photos":[],"__v":"0"}
+
+
+# {"_id":"5d8a9ee670c3795ad4f55566","fname":"Kevin","lname":"Dreizer","email":"kevindreizer@mum.edu","password":"$2b$12$avsQaQLJ1rzK9ezcr4M74e33daHUy9xwr.nwbzXz.k2YGOZFQBEam","profile_picture":"http://drive.google.com/photos/2","payment_method":{"card_type":"Visa","number":"1234567890123456","secrete_no":"321","expiry_date":"04/21","name_on_the_card":"Kevin Dreizer"},"uploaded_photos":[{"url":"https://images.unsplash.com/photo-1455625464345-91f3283486e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80","title":"tigers","description":"tigers getting some rest ha!","category":"animal","price":"0","likes":"5","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1472905459710-90be06856cc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1356&q=80","title":"marriage","description":"from the ceremony of my ex gf.","category":"romance","price":"13","likes":"8","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1501032798439-59c0d3c6b8bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80","title":"tunnel","description":"cool tunnel under the snowy hill","category":"environment","price":"0","likes":"19","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1291&q=80","title":"northern girl","description":"cute girl with green eyes in the nordic","category":"portrait","price":"3","likes":"35","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1469536435766-6897b520a576?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80","title":"sheeps","description":"silly sheeps with the landscape","category":"landscape","price":"6","likes":"56","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1486082570281-d942af5c39b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80","title":"tent","description":"tent in the wild during night","category":"environment","price":"20","likes":"44","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1478595219720-e05a0c3a0c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1433&q=80","title":"bestie","description":"my best friend is in a good mood","category":"animal","price":"4","likes":"63","comments":[]}],"cart":[],"bought_photos":[],"__v":"0"}
+
+# {"_id":"5d8aa08770c3795ad4f55567","fname":"David","lname":"Anderson","email":"davidanderson@mum.edu","password":"$2b$12$avsQaQLJ1rzK9ezcr4M74e33daHUy9xwr.nwbzXz.k2YGOZFQBEam","profile_picture":"http://drive.google.com/photos/3","payment_method":{"card_type":"Visa","number":"1234567890123456","secrete_no":"321","expiry_date":"04/21","name_on_the_card":"David Anderson"},"uploaded_photos":[{"url":"https://images.unsplash.com/photo-1542168476-872cb1094e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=604&q=80","title":"city","description":"city view from the birdge","category":"architecture","price":"7","likes":"19","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1500021804447-2ca2eaaaabeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80","title":"city sunset","description":"megacity view with sunset","category":"architecture","price":"23","likes":"9","comments":[]},
+# {"url":"https://images.unsplash.com/photo-1504392022767-a8fc0771f239?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80","title":"bee","description":"bee is working hard!","category":"animal","price":"6","likes":"87","comments":[]}],"cart":[],"bought_photos":[],"__v":"0"}
+
 
 ####
 

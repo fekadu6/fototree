@@ -5,6 +5,7 @@
       src="{{ photo.url }}"
       class="photo"
       alt="{{ photo.title }}"
+      (click)="showDetail(photo)"
     />
   </div>
   <div class="photo-caption mat-body-1">{{ photo.category }}</div>

@@ -8,16 +8,16 @@
 }
 
 .left {
-  flex: 0 0 35%;
+  flex: 0 0 65%;
 }
 
 .right {
-  flex: 0 0 65%;
+  flex: 0 0 35%;
   width: 100%;
 }
 
 .left img {
-  width: 350px;
+  width: 700px;
 }
 
 mat-form-field.comment-textarea,
